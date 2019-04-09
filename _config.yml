@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
+title: October Autumn
+subtitle: October Autumn
+description: dasdasdadsvc # 要让事情改变，先改变自己。要让事情变得更好，先让自己变得更强
 keywords:
-author: John Doe
+author: Ma feilong
 language: zh-CN
 timezone:
 
@@ -29,13 +29,13 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :year-:month-:day-:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -73,7 +73,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-hueman-master
+theme: hexo-theme-matery-1.0.1
+# theme: hexo-theme-hueman-master
+# theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
