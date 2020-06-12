@@ -4,8 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="linux-primer, October Autumn">
-    <meta name="description" content="linux-primer | October Autumn">
+    <meta name="keywords" content="GitHub入门, October Autumn">
+    <meta name="description" content="上传项目到GitHub在本地新建了项目需要上传到GitHub时使用
+1.登陆自己的github账号创建项目
+2.把需要上传的项目放在文件中，将鼠标箭头到文件上，鼠标右键，选择Git Bash Here.
+使用命令初始化本地仓库   git ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>linux-primer | October Autumn</title>
+    <title>GitHub入门 | October Autumn</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -279,13 +282,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        linux-primer
+                        GitHub入门
                     </div>
                 </div>
             </div>
@@ -375,12 +378,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/GitHub/" target="_blank">
+                                <span class="chip bg-color">GitHub</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/GitHub/" class="post-category" target="_blank">
+                                GitHub
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -388,14 +404,14 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-04-11
+                    2020-06-12
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        268
                     </div>
                     
 
@@ -418,7 +434,28 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="上传项目到GitHub"><a href="#上传项目到GitHub" class="headerlink" title="上传项目到GitHub"></a>上传项目到GitHub</h1><p>在本地新建了项目需要上传到GitHub时使用</p>
+<p>1.登陆自己的github账号创建项目</p>
+<p>2.把需要上传的项目放在文件中，将鼠标箭头到文件上，鼠标右键，选择Git Bash Here.</p>
+<p>使用命令初始化本地仓库   git init<br>把当前目录下所有的文件及子目录都添加管理，也可以把.换成相应的文件名</p>
+<pre class=" language-bash"><code class="language-bash"> <span class="token function">git</span> add .或git add <span class="token punctuation">[</span>filename<span class="token punctuation">]</span>
+</code></pre>
+<p>把本地仓库暂存区的文件提交到本地仓库</p>
+<pre class=" language-bash"><code class="language-bash"> <span class="token function">git</span> commit -m <span class="token string">'first comment'</span>
+</code></pre>
+<p>把本地仓库和远程仓库相关联，其中origin是远程仓库的别名。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> remote add origin <span class="token punctuation">[</span>复制的git仓库地址<span class="token punctuation">]</span>
+</code></pre>
+<p>要把本地仓库和远程仓库做同步时使用。否则可以省略此步骤，其中master为远程仓库的分支名。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> pull --rebase origin master
+</code></pre>
+<p>把本地仓库中的文件同步到远程仓库中。其中master为远程仓库的分支名。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> push -u origin master
+</code></pre>
+<p>最后可以使用命令查看状态</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> status
+</code></pre>
+
             </div>
             <hr>
 
@@ -441,7 +478,7 @@
                     </span>
                     <a href="http://yoursite.com" class="b-link-green">October Autumn</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/linux-primer/index.html" class="b-link-green">linux-primer</a>
+                    <a href="/2020/06/12/github-2020-06-12-publish-github-primer/" class="b-link-green">GitHub入门</a>
                 </p>
             </div>
         </div>
@@ -464,33 +501,45 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/linux-primer/index.html">
+                <a href="/2020/06/12/docker-2020-06-12-docker-zone-primer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="linux-primer">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="docker容器时区问题">
                         
-                        <span class="card-title">linux-primer</span>
+                        <span class="card-title">docker容器时区问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">Docker 解决容器时间与Linux主机时间不一致的问题三种解决方案Docker容器时间与主机时间不一致通过date命令分别查看容器和linux的时间
+# 进入docker 容器  
+docker exec -it tjfx8006 /b</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-12
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Ma feilong
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/docker/" class="post-category" target="_blank">
+                                    docker
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -498,33 +547,47 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/linux-primer/index.html">
+                <a href="/2019/04/12/java-2019-04-12-jdk8-new-feature/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="linux-primer">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="jdk8 新特性">
                         
-                        <span class="card-title">linux-primer</span>
+                        <span class="card-title">jdk8 新特性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">1.  接口的默认方法和静态方法
+​        jdk8新增的接口默认方法，接口可以有默认的实现方法。而不需要接口的实现类去实现该方法。我们只需要在方法前加上default关键字就可以了。
+
+1. 接口默认方法1. 语法  public</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-11
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-12
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Ma feilong
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/java/" class="post-category" target="_blank">
+                                    java
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

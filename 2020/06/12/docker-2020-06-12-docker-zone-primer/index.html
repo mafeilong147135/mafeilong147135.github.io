@@ -4,8 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="linux-primer, October Autumn">
-    <meta name="description" content="linux-primer | October Autumn">
+    <meta name="keywords" content="docker容器时区问题, October Autumn">
+    <meta name="description" content="Docker 解决容器时间与Linux主机时间不一致的问题三种解决方案Docker容器时间与主机时间不一致通过date命令分别查看容器和linux的时间
+# 进入docker 容器  
+docker exec -it tjfx8006 /b">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>linux-primer | October Autumn</title>
+    <title>docker容器时区问题 | October Autumn</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -279,13 +281,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        linux-primer
+                        docker容器时区问题
                     </div>
                 </div>
             </div>
@@ -375,12 +377,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/docker/" target="_blank">
+                                <span class="chip bg-color">docker</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/docker/" class="post-category" target="_blank">
+                                docker
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -388,21 +403,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-04-11
+                    2020-06-12
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        584
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -418,7 +433,33 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="Docker-解决容器时间与Linux主机时间不一致的问题三种解决方案"><a href="#Docker-解决容器时间与Linux主机时间不一致的问题三种解决方案" class="headerlink" title="Docker 解决容器时间与Linux主机时间不一致的问题三种解决方案"></a>Docker 解决容器时间与Linux主机时间不一致的问题三种解决方案</h2><p>Docker容器时间与主机时间不一致<br>通过date命令分别查看容器和linux的时间</p>
+<pre class=" language-shell"><code class="language-shell"># 进入docker 容器  
+docker exec -it tjfx8006 /bin/sh
+</code></pre>
+<p>CST应该是指（China Shanghai Time，东八区时间）<br>UTC应该是指（Coordinated Universal Time，标准时间）<br>所以，这2个时间实际上应该相差8个小时。(ps: 所以没有设置过的容器, 一般跟宿主机时间相差8h)<br>所以，必须统一两者的时区。</p>
+<h3 id="Dockerfile-时区设置"><a href="#Dockerfile-时区设置" class="headerlink" title="Dockerfile 时区设置"></a>Dockerfile 时区设置</h3><pre class=" language-dockerfile"><code class="language-dockerfile">RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' > /etc/timezone
+</code></pre>
+<h3 id="Java-时区设置"><a href="#Java-时区设置" class="headerlink" title="Java 时区设置"></a>Java 时区设置</h3><p><strong>注意</strong>, 如果能确保所在主机/etc/timezone内容正确,则不需要再对Java时区进行设置</p>
+<pre class=" language-java"><code class="language-java">TimeZone tz <span class="token operator">=</span> TimeZone<span class="token punctuation">.</span><span class="token function">getTimeZone</span><span class="token punctuation">(</span><span class="token string">"Asia/Shanghai"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+TimeZone<span class="token punctuation">.</span><span class="token function">setDefault</span><span class="token punctuation">(</span>tz<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="Linux-时间知识"><a href="#Linux-时间知识" class="headerlink" title="Linux 时间知识"></a>Linux 时间知识</h3><p>windows的系统时间就是硬件时间,除了windows的系统(如Linux,Mac)的系统时间是硬件时间结合时区.<br>也就是说,对于Linux系统来说,硬件时间是 UTC 标准时间,本地时间需要结合时区计算出来,在linux中与时间相关的文件有 /etc/localtime和 /etc/timezone。其中，/etc/localtime是用来描述本机时间，而 /etc/timezone是用来描述本机所属的时区。</p>
+<h3 id="Linux-修改本机时间"><a href="#Linux-修改本机时间" class="headerlink" title="Linux 修改本机时间"></a>Linux 修改本机时间</h3><p>旧版本(如CentOS6)</p>
+<pre class=" language-shell"><code class="language-shell">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre>
+<p>新版本(如CentOS7)</p>
+<pre class=" language-shell"><code class="language-shell">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>​       原本的时区文件变成了链接文件,直接使用cp就相当于把原时区文件内容给覆盖掉,而且文件名不变! 例如,原本的 /etc/localtime 是链接到 /usr/share/zoneinfo/America/New_York 的,使用</p>
+<pre class=" language-shell"><code class="language-shell">cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+</code></pre>
+<p>之后原本New_York 的内容就变成了 Shanghai 的内容,文件名不变.</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>​      调整了时间格式，本机所属的时区仍保持不变.<br>​      Linux 修改本机时区在linux中，有一些程序会自己计算时间，不会直接采用带有时区的本机时间格式，会根据UTC时间和本机所属的时区等计算出当前的时间。 比如jdk应用，时区为“Etc/UTC”，本机时间改为北京时间，通过java代码中new 出来的时间还是utc时间，所以必须得修正本机的时区。</p>
+<pre class=" language-dockerfile"><code class="language-dockerfile">echo 'Asia/Shanghai' > /etc/timezone
+</code></pre>
+
             </div>
             <hr>
 
@@ -441,7 +482,7 @@
                     </span>
                     <a href="http://yoursite.com" class="b-link-green">October Autumn</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/linux-primer/index.html" class="b-link-green">linux-primer</a>
+                    <a href="/2020/06/12/docker-2020-06-12-docker-zone-primer/" class="b-link-green">docker容器时区问题</a>
                 </p>
             </div>
         </div>
@@ -467,30 +508,44 @@
                 <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/linux-primer/index.html">
+                <a href="/2020/06/12/docker-2020-06-12-docker-zone-primer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="linux-primer">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="docker容器时区问题">
                         
-                        <span class="card-title">linux-primer</span>
+                        <span class="card-title">docker容器时区问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">Docker 解决容器时间与Linux主机时间不一致的问题三种解决方案Docker容器时间与主机时间不一致通过date命令分别查看容器和linux的时间
+# 进入docker 容器  
+docker exec -it tjfx8006 /b</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-11
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-12
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Ma feilong
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/docker/" class="post-category" target="_blank">
+                                    docker
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -498,33 +553,47 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/linux-primer/index.html">
+                <a href="/2020/06/12/github-2020-06-12-publish-github-primer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="linux-primer">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="GitHub入门">
                         
-                        <span class="card-title">linux-primer</span>
+                        <span class="card-title">GitHub入门</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">上传项目到GitHub在本地新建了项目需要上传到GitHub时使用
+1.登陆自己的github账号创建项目
+2.把需要上传的项目放在文件中，将鼠标箭头到文件上，鼠标右键，选择Git Bash Here.
+使用命令初始化本地仓库   git </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-11
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-12
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Ma feilong
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/GitHub/" class="post-category" target="_blank">
+                                    GitHub
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/GitHub/" target="_blank">
+                        <span class="chip bg-color">GitHub</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

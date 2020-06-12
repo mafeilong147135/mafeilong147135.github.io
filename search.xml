@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>docker容器时区问题</title>
+      <link href="/2020/06/12/docker-2020-06-12-docker-zone-primer/"/>
+      <url>/2020/06/12/docker-2020-06-12-docker-zone-primer/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Docker-解决容器时间与Linux主机时间不一致的问题三种解决方案"><a href="#Docker-解决容器时间与Linux主机时间不一致的问题三种解决方案" class="headerlink" title="Docker 解决容器时间与Linux主机时间不一致的问题三种解决方案"></a>Docker 解决容器时间与Linux主机时间不一致的问题三种解决方案</h2><p>Docker容器时间与主机时间不一致<br>通过date命令分别查看容器和linux的时间</p><pre class=" language-shell"><code class="language-shell"># 进入docker 容器  docker exec -it tjfx8006 /bin/sh</code></pre><p>CST应该是指（China Shanghai Time，东八区时间）<br>UTC应该是指（Coordinated Universal Time，标准时间）<br>所以，这2个时间实际上应该相差8个小时。(ps: 所以没有设置过的容器, 一般跟宿主机时间相差8h)<br>所以，必须统一两者的时区。</p><h3 id="Dockerfile-时区设置"><a href="#Dockerfile-时区设置" class="headerlink" title="Dockerfile 时区设置"></a>Dockerfile 时区设置</h3><pre class=" language-dockerfile"><code class="language-dockerfile">RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtimeRUN echo 'Asia/Shanghai' > /etc/timezone</code></pre><h3 id="Java-时区设置"><a href="#Java-时区设置" class="headerlink" title="Java 时区设置"></a>Java 时区设置</h3><p><strong>注意</strong>, 如果能确保所在主机/etc/timezone内容正确,则不需要再对Java时区进行设置</p><pre class=" language-java"><code class="language-java">TimeZone tz <span class="token operator">=</span> TimeZone<span class="token punctuation">.</span><span class="token function">getTimeZone</span><span class="token punctuation">(</span><span class="token string">"Asia/Shanghai"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>TimeZone<span class="token punctuation">.</span><span class="token function">setDefault</span><span class="token punctuation">(</span>tz<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h3 id="Linux-时间知识"><a href="#Linux-时间知识" class="headerlink" title="Linux 时间知识"></a>Linux 时间知识</h3><p>windows的系统时间就是硬件时间,除了windows的系统(如Linux,Mac)的系统时间是硬件时间结合时区.<br>也就是说,对于Linux系统来说,硬件时间是 UTC 标准时间,本地时间需要结合时区计算出来,在linux中与时间相关的文件有 /etc/localtime和 /etc/timezone。其中，/etc/localtime是用来描述本机时间，而 /etc/timezone是用来描述本机所属的时区。</p><h3 id="Linux-修改本机时间"><a href="#Linux-修改本机时间" class="headerlink" title="Linux 修改本机时间"></a>Linux 修改本机时间</h3><p>旧版本(如CentOS6)</p><pre class=" language-shell"><code class="language-shell">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre><p>新版本(如CentOS7)</p><pre class=" language-shell"><code class="language-shell">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>​       原本的时区文件变成了链接文件,直接使用cp就相当于把原时区文件内容给覆盖掉,而且文件名不变! 例如,原本的 /etc/localtime 是链接到 /usr/share/zoneinfo/America/New_York 的,使用</p><pre class=" language-shell"><code class="language-shell">cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime</code></pre><p>之后原本New_York 的内容就变成了 Shanghai 的内容,文件名不变.</p><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>​      调整了时间格式，本机所属的时区仍保持不变.<br>​      Linux 修改本机时区在linux中，有一些程序会自己计算时间，不会直接采用带有时区的本机时间格式，会根据UTC时间和本机所属的时区等计算出当前的时间。 比如jdk应用，时区为“Etc/UTC”，本机时间改为北京时间，通过java代码中new 出来的时间还是utc时间，所以必须得修正本机的时区。</p><pre class=" language-dockerfile"><code class="language-dockerfile">echo 'Asia/Shanghai' > /etc/timezone</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GitHub入门</title>
+      <link href="/2020/06/12/github-2020-06-12-publish-github-primer/"/>
+      <url>/2020/06/12/github-2020-06-12-publish-github-primer/</url>
+      
+        <content type="html"><![CDATA[<h1 id="上传项目到GitHub"><a href="#上传项目到GitHub" class="headerlink" title="上传项目到GitHub"></a>上传项目到GitHub</h1><p>在本地新建了项目需要上传到GitHub时使用</p><p>1.登陆自己的github账号创建项目</p><p>2.把需要上传的项目放在文件中，将鼠标箭头到文件上，鼠标右键，选择Git Bash Here.</p><p>使用命令初始化本地仓库   git init<br>把当前目录下所有的文件及子目录都添加管理，也可以把.换成相应的文件名</p><pre class=" language-bash"><code class="language-bash"> <span class="token function">git</span> add .或git add <span class="token punctuation">[</span>filename<span class="token punctuation">]</span></code></pre><p>把本地仓库暂存区的文件提交到本地仓库</p><pre class=" language-bash"><code class="language-bash"> <span class="token function">git</span> commit -m <span class="token string">'first comment'</span></code></pre><p>把本地仓库和远程仓库相关联，其中origin是远程仓库的别名。</p><pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> remote add origin <span class="token punctuation">[</span>复制的git仓库地址<span class="token punctuation">]</span></code></pre><p>要把本地仓库和远程仓库做同步时使用。否则可以省略此步骤，其中master为远程仓库的分支名。</p><pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> pull --rebase origin master</code></pre><p>把本地仓库中的文件同步到远程仓库中。其中master为远程仓库的分支名。</p><pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> push -u origin master</code></pre><p>最后可以使用命令查看状态</p><pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> status</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> GitHub </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GitHub </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>jdk8 新特性</title>
       <link href="/2019/04/12/java-2019-04-12-jdk8-new-feature/"/>
       <url>/2019/04/12/java-2019-04-12-jdk8-new-feature/</url>
