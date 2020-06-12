@@ -1,0 +1,1872 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="linux入门, October Autumn">
+    <meta name="description" content="1  vi和vim的基本介绍所有的 Linux 系统都会内建 vi 文本编辑器。
+Vim 具有程序编辑的能力，可以看做是Vi的增强版本，可以主动的以字体颜色辨别语法的正确性，方便程序设计。代码补完、编译及错误跳转等方便编程的功能特别丰富，在">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>linux入门 | October Autumn</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/630.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">October Autumn</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/630.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">October Autumn</div>
+        <div class="logo-desc">
+            
+            要让事情改变，先改变自己。要让事情变得更好，先让自己变得更强
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+
+    <div class="social-link">
+    <a href="https://github.com/mafeilong147135" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:mfl147135@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=957928695" class="tooltipped" data-tooltip="QQ联系我: 957928695" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+        <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewbox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+    </svg>
+</a>
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        linux入门
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+</style>
+<div class="row">
+    <div class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/linux/" target="_blank">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/linux/" class="post-category" target="_blank">
+                                linux
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-11
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        12.3k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        47 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-vi和vim的基本介绍"><a href="#1-vi和vim的基本介绍" class="headerlink" title="1  vi和vim的基本介绍"></a>1  vi和vim的基本介绍</h2><p>所有的 Linux 系统都会内建 vi 文本编辑器。</p>
+<p>Vim 具有程序编辑的能力，可以看做是Vi的增强版本，可以主动的以字体颜色辨别语法的正确性，方便程序设计。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
+<p>我们只需要掌握它的基本使用即可。</p>
+<h3 id="1-1-LINUX操作系统VIM的安装和配置"><a href="#1-1-LINUX操作系统VIM的安装和配置" class="headerlink" title="1.1 LINUX操作系统VIM的安装和配置"></a>1.1 LINUX操作系统VIM的安装和配置</h3><h4 id="1-1-1-VIM的安装"><a href="#1-1-1-VIM的安装" class="headerlink" title="1.1.1 VIM的安装"></a>1.1.1 VIM的安装</h4><p>在命令行敲入“vi”后按”tab”键，可以看到目前系统中只安装了vi和vim.tiny。</p>
+<p>vim是从VI发展而来的一个文本编辑器，功能更强大。而vim.tiny是vim的精简版，所以，安装vim势在必行。</p>
+<p>centos系统：</p>
+<p>普通用户下输入命令：yum -y install vim*</p>
+<p>ubuntu系统：</p>
+<p>普通用户下输入命令：sudo apt-get install vim-gtk</p>
+<p>之后不需要任何操作，等待安装完成。安装完成之后，在命令行敲入vi，按“tab”键。可以看到，已经有vim命令的存在。安装成功。</p>
+<h4 id="1-1-2-VIM的配置"><a href="#1-1-2-VIM的配置" class="headerlink" title="1.1.2 VIM的配置"></a>1.1.2 VIM的配置</h4><p>set nu                           // 在左侧行号</p>
+<p>set tabstop                  //tab 长度设置为 4</p>
+<p>set nobackup               //覆盖文件时不备份</p>
+<p>set cursorline               //突出显示当前行</p>
+<p>set ruler                       //在右下角显示光标位置的状态行</p>
+<p>set autoindent             //自动缩进</p>
+<h2 id="2-vim和vi的快捷键的使用"><a href="#2-vim和vi的快捷键的使用" class="headerlink" title="2  vim和vi的快捷键的使用"></a>2  vim和vi的快捷键的使用</h2><p>1) 拷贝当前行   yy , 拷贝当前行向下的5行  5yy，并粘贴 p。【快捷键在正常模式下使用】</p>
+<p>2) 删除当前行  dd  , 删除当前行向下的5行 5dd</p>
+<p>3) 在文件中查找某个单词 [命令模式下 /关键字 ， 回车 查找 ,  输入 n 就是查找下一个]</p>
+<p>4) 设置文件的行号，取消文件的行号.[命令行下  : set nu 和  :set nonu]</p>
+<p>5) 编辑 /etc/profile 文件，使用快捷键到底文档的最末行[G]和最首行[gg] 【正常模式下】</p>
+<p>6) 在一个文件中输入 “hello” ,然后又撤销这个动作  u  【正常模式下】</p>
+<p>7) 编辑  /etc/profile 文件，并将光标移动到  20行 shift+g</p>
+<h2 id="3-开机、重启和用户登录注销"><a href="#3-开机、重启和用户登录注销" class="headerlink" title="3    开机、重启和用户登录注销"></a>3    开机、重启和用户登录注销</h2><h3 id="3-1-关机-amp-重启命令"><a href="#3-1-关机-amp-重启命令" class="headerlink" title="3.1     关机&amp;重启命令"></a>3.1     关机&amp;重启命令</h3><p>shutdown -h now [立刻关机]</p>
+<p>shutdown -h  1   “1分钟，关机.”   [1分钟后，关机]</p>
+<p>shutdown -r  now   [立刻重启]</p>
+<p>shutdown -r  2  “2分钟后，重启”</p>
+<p>halt  【立刻关机】</p>
+<p>reboot  【立刻重启】</p>
+<p>在重启和关机前，通常需要先执行</p>
+<p>sync  [把内存的数据，写入磁盘]</p>
+<p>注意细节：</p>
+<p>不管是重启系统还是关闭系统，首先要运行sync命令，把内存中的数据写到磁盘中</p>
+<h3 id="3-2-用户的登录和注销"><a href="#3-2-用户的登录和注销" class="headerlink" title="3.2     用户的登录和注销"></a>3.2     用户的登录和注销</h3><p>1) 登录时尽量少用root帐号登录，因为它是系统管理员，最大的权限，避免操作失误。可以利用普通用户登录，登录后再用”su - 用户名’命令来切换成系统管理员身份.</p>
+<p>2) 在提示符下输入 logout 即可注销用户【不同的shell 可能不同(logout  exit)】</p>
+<p>3 logout 注销指令在图形<strong>运行级别</strong>(简单提一下：<strong>0-6**</strong>个级别**)无效，在 运行级别 3下有效.</p>
+<p>4) 运行级别这个概念，后面给大家介绍</p>
+<h2 id="4-用户管理"><a href="#4-用户管理" class="headerlink" title="4   用户管理"></a>4   用户管理</h2><h3 id="4-1-基本介绍"><a href="#4-1-基本介绍" class="headerlink" title="4.1     基本介绍"></a>4.1     基本介绍</h3><p>Linux系统是一个多用户多任务的操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统</p>
+<h3 id="4-2-添加用户"><a href="#4-2-添加用户" class="headerlink" title="4.2     添加用户"></a>4.2     添加用户</h3><p>基本语法</p>
+<p>useradd  用户名</p>
+<p>案例演示</p>
+<p>添加一个用户 xiaoming : useradd xiaoming</p>
+<p> 使用细节</p>
+<p>1) 当创建用户成功后，会自动的创建和用户同名的家目录 【/home/xiaoming】</p>
+<p>2) 也可以通过 useradd -d  指定目录   新的用户名jack，给新创建的用户指定家目录</p>
+<h3 id="4-3-指定-修改密码"><a href="#4-3-指定-修改密码" class="headerlink" title="4.3     指定/修改密码"></a>4.3     指定/修改密码</h3><h4 id="4-3-1-基本语法"><a href="#4-3-1-基本语法" class="headerlink" title="4.3.1 基本语法"></a>4.3.1 基本语法</h4><p>passwd    用户名    如果没有带用户名，则是给当前登录的用户修改密码</p>
+<h4 id="4-3-2-应用案例"><a href="#4-3-2-应用案例" class="headerlink" title="4.3.2 应用案例"></a>4.3.2 应用案例</h4><p>给xiaoming 指定密码</p>
+<p>passwd xiaoming   需要root用户或自身才能修改</p>
+<h3 id="4-4-删除用户"><a href="#4-4-删除用户" class="headerlink" title="4.4    删除用户"></a>4.4    删除用户</h3><h4 id="4-4-1-基本语法"><a href="#4-4-1-基本语法" class="headerlink" title="4.4.1 基本语法"></a>4.4.1 基本语法</h4><p>userdel   用户名</p>
+<h4 id="4-4-2-应用案例"><a href="#4-4-2-应用案例" class="headerlink" title="4.4.2 应用案例"></a>4.4.2 应用案例</h4><p>删除用户xiaoming，但是要保留家目录  userdel 用户名  <strong>userdel xiaoming</strong></p>
+<p>删除用户以及用户主目录    userdel –r  xiaoming 【小心使用】</p>
+<h4 id="4-4-3-细节说明"><a href="#4-4-3-细节说明" class="headerlink" title="4.4.3 细节说明"></a>4.4.3 细节说明</h4><p>是否保留家目录的讨论？ [<strong>一般保留</strong>]</p>
+<p> 查询用户信息指令</p>
+<p>id  用户名</p>
+<p>1) 当用户不存在时，返回无此用户 </p>
+<h3 id="4-5-切换用户"><a href="#4-5-切换用户" class="headerlink" title="4.5     切换用户"></a>4.5     切换用户</h3><h4 id="4-5-1-介绍"><a href="#4-5-1-介绍" class="headerlink" title="4.5.1 介绍"></a>4.5.1 介绍</h4><p>在操作Linux中，如果当前用户的权限不够，可以通过 su - 指令，切换到高权限用户，比如root</p>
+<h4 id="4-5-2-基本语法"><a href="#4-5-2-基本语法" class="headerlink" title="4.5.2 基本语法"></a>4.5.2 基本语法</h4><p>su  –  切换用户名</p>
+<h4 id="4-5-3-细节说明"><a href="#4-5-3-细节说明" class="headerlink" title="4.5.3 细节说明"></a>4.5.3 细节说明</h4><p>1) 从权限高的用户切换到权限低的用户，不需要输入密码，反之需要。</p>
+<p>2) 当需要返回到原来用户时，使用exit指令</p>
+<p>3) 如果 su – <strong>没有带用户名</strong>，则默认切换到root用户</p>
+<h3 id="4-7-用户组"><a href="#4-7-用户组" class="headerlink" title="4.7   用户组"></a>4.7   用户组</h3><h4 id="4-7-1-介绍"><a href="#4-7-1-介绍" class="headerlink" title="4.7.1 介绍"></a>4.7.1 介绍</h4><p>类似于角色，系统可以对有共性的多个用户进行统一的管理。</p>
+<h4 id="4-7-2-新增组"><a href="#4-7-2-新增组" class="headerlink" title="4.7.2 新增组"></a>4.7.2 新增组</h4><p>指令</p>
+<p><strong>groupadd</strong> 组名   </p>
+<h4 id="4-7-3-案例演示-增加-wudang-武当"><a href="#4-7-3-案例演示-增加-wudang-武当" class="headerlink" title="4.7.3 案例演示 [增加 wudang] 武当"></a>4.7.3 案例演示 [增加 wudang] 武当</h4><p>groupadd  wudang</p>
+<h4 id="4-7-4-增加用户时直接加上组"><a href="#4-7-4-增加用户时直接加上组" class="headerlink" title="4.7.4 增加用户时直接加上组"></a>4.7.4 增加用户时直接加上组</h4><p>指令(基本语法)</p>
+<p>useradd  –g 用户组 用户名</p>
+<p>增加一个用户 zwj, 直接将他指定到 wudang   useradd -g wudang zwj</p>
+<h4 id="4-7-5-删除组"><a href="#4-7-5-删除组" class="headerlink" title="4.7.5 删除组"></a>4.7.5 删除组</h4><p> 指令(基本语法)</p>
+<p>​       groupdel 组名</p>
+<p> 案例演示</p>
+<p>这里有一个前提，就是这个组没有用户，才能删除。</p>
+<h4 id="4-7-6-修改用户的组"><a href="#4-7-6-修改用户的组" class="headerlink" title="4.7.6 修改用户的组"></a>4.7.6 修改用户的组</h4><p>指令(基本语法)</p>
+<p>usermod  –g 新的组名 用户名</p>
+<p> 案例演示</p>
+<p>创建一个shaolin组，让将zwj 用户修改到shaolin  usermod -g shaolin zwj</p>
+<h3 id="4-8-用户和组的相关文件"><a href="#4-8-用户和组的相关文件" class="headerlink" title="4.8     用户和组的相关文件"></a>4.8     用户和组的相关文件</h3><h4 id="4-8-1-etc-passwd-文件"><a href="#4-8-1-etc-passwd-文件" class="headerlink" title="4.8.1 /etc/passwd 文件"></a>4.8.1 /etc/passwd 文件</h4><p>用户（user）的配置文件，记录用户的各种信息</p>
+<p>每行的含义：用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell </p>
+<h4 id="4-8-2-etc-shadow-文件"><a href="#4-8-2-etc-shadow-文件" class="headerlink" title="4.8.2  /etc/shadow 文件"></a>4.8.2  /etc/shadow 文件</h4><p>口令的配置文件</p>
+<p>每行的含义：登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:保留 </p>
+<h4 id="4-8-3-etc-group-文件"><a href="#4-8-3-etc-group-文件" class="headerlink" title="4.8.3 /etc/group 文件"></a>4.8.3 /etc/group 文件</h4><p> 组(group)的配置文件，记录Linux包含的组的信息</p>
+<p>每行含义：组名:口令:组标识号:组内用户列表</p>
+<h2 id="5-实用指令"><a href="#5-实用指令" class="headerlink" title="5    实用指令"></a>5    实用指令</h2><h3 id="5-1-指定运行级别"><a href="#5-1-指定运行级别" class="headerlink" title="5.1     指定运行级别"></a>5.1     指定运行级别</h3><h4 id="5-1-1-基本介绍"><a href="#5-1-1-基本介绍" class="headerlink" title="5.1.1 基本介绍"></a>5.1.1 基本介绍</h4><p>运行级别说明：  </p>
+<p>1) 0 ：关机 </p>
+<p>2) 1 ：单用户 [类似安全模式， 这个模式可以帮助找回root密码]</p>
+<p>3) 2：多用户状态没有网络服务</p>
+<p>4) 3：多用户状态有网络服务 [<strong>使用最多</strong>]</p>
+<p>5) 4：系统未使用保留给用户</p>
+<p>6) 5：图形界面 【】</p>
+<p>7) 6：系统重启  </p>
+<p>常用运行级别是<strong>3</strong>和<strong>5</strong> ，要修改默认的运行级别可改文件</p>
+<p>如果指定运行级别</p>
+<p><strong>/etc/inittab</strong>的</p>
+<p>id:<strong>5</strong>:initdefault:这一行中的数字</p>
+<p>命令：init [012356]  https协议</p>
+<p>应用实例：</p>
+<p>案例： 通过init 来切换不同的运行级别，比如动 5-3 ， 然后关机</p>
+<p>init  5</p>
+<p>init  3</p>
+<p>init  0</p>
+<h3 id="5-2-指定运行级别"><a href="#5-2-指定运行级别" class="headerlink" title="5.2     指定运行级别"></a>5.2     指定运行级别</h3><p>1）如何找回root密码 </p>
+<p>启动时-&gt;快速输入enter-&gt;输入e-&gt; 进入到编辑界面-&gt; 选择中间有kernel 项-&gt;<br> 输入e(edit)-&gt; 在该行的最后写入 1 [表示修改内核，临时生效]-&gt; 输入enter-&gt;<br> 输入b [boot]-&gt; 进入到单用模式 【这里就可以做补救工作】</p>
+<p>2) 我们的 运行级别，linux 运行后，直接进入到 命令行终端(3级别)  </p>
+<p>在<strong>/etc/inittab</strong>修改 id:<strong>5</strong>:initdefault:这一行中的数字为 id:<strong>3</strong>:initdefault:</p>
+<h3 id="5-3-帮助指令"><a href="#5-3-帮助指令" class="headerlink" title="5.3     帮助指令"></a>5.3     帮助指令</h3><h4 id="5-3-1-man-获得帮助信息"><a href="#5-3-1-man-获得帮助信息" class="headerlink" title="5.3.1 man 获得帮助信息"></a>5.3.1 man 获得帮助信息</h4><p>基本语法</p>
+<p>​       man 命令或配置文件</p>
+<p> 应用实例</p>
+<p>​       案例：查看ls命令的帮助信息</p>
+<p>man ls</p>
+<h4 id="5-3-2-help指令"><a href="#5-3-2-help指令" class="headerlink" title="5.3.2 help指令"></a>5.3.2 help指令</h4><p>基本语法</p>
+<p>​       help 命令 （功能描述：获得shell内置命令的帮助信息）</p>
+<p> 应用实例</p>
+<p>​       案例：查看cd命令的帮助信息</p>
+<p>help cd</p>
+<h3 id="5-4-文件和目录相关的指令"><a href="#5-4-文件和目录相关的指令" class="headerlink" title="5.4     文件和目录相关的指令"></a>5.4     文件和目录相关的指令</h3><h4 id="5-4-1-pwd-指令"><a href="#5-4-1-pwd-指令" class="headerlink" title="5.4.1 pwd 指令"></a>5.4.1 pwd 指令</h4><p>基本语法</p>
+<p>​       pwd      (功能描述：显示当前工作目录的绝对路径)</p>
+<p>应用实例</p>
+<p>​       案例：显示当前工作目录的绝对路径</p>
+<p>演示：pwd </p>
+<h4 id="5-4-2-ls指令"><a href="#5-4-2-ls指令" class="headerlink" title="5.4.2 ls指令"></a>5.4.2 ls指令</h4><p> 基本语法</p>
+<p>​       ls  选项  目录或是文件</p>
+<p>常用选项</p>
+<p>​       -a ：显示当前目录所有的文件和目录，包括隐藏的 (文件名以.开头就是隐藏)。</p>
+<p>​       -l  ：以列表的方式显示信息</p>
+<p>​       -h  : 显示文件大小时，以 k , m, G单位显示</p>
+<p>应用实例</p>
+<p>​      案例:查看当前目录的所有内容信息</p>
+<p>ls  -alh  显示当前的目录内容</p>
+<p>ls  -alh  指定目录</p>
+<p>比如：</p>
+<p>  ls  -alh  /root/</p>
+<h4 id="5-4-3-cd-指令"><a href="#5-4-3-cd-指令" class="headerlink" title="5.4.3 cd 指令"></a>5.4.3 cd 指令</h4><p>基本语法</p>
+<p>​       cd  [参数]  (功能描述：切换到指定目录)</p>
+<p>常用参数</p>
+<p>​       <strong>绝对路径</strong>【从 / 开始定位】和<strong>相对路径</strong>【从当前的位置开始定位】 </p>
+<p>​       cd ~  或者cd ：回到自己的家目录</p>
+<p>​       cd ..  回到当前目录的上一级目录</p>
+<p> 应用实例 </p>
+<p>​      案例1：使用绝对路径切换到root目录  [cd /root]</p>
+<p>​      案例2:  使用相对路径到/root 目录 [  cd ../root]</p>
+<p>​      案例3：表示回到当前目录的上一级目录 [ cd ..]</p>
+<p>​      案例4：回到家目录  [ cd ~ ]</p>
+<h4 id="5-4-4-mkdir指令-make-directory"><a href="#5-4-4-mkdir指令-make-directory" class="headerlink" title="5.4.4 mkdir指令 [make directory]"></a>5.4.4 mkdir指令 [make directory]</h4><p>  说明</p>
+<p>​      mkdir指令用于创建目录</p>
+<p> 基本语法</p>
+<p>​      mkdir  [选项]  要创建的目录</p>
+<p> 常用选项</p>
+<p>​      -p ：创建多级目录</p>
+<p> 应用实例</p>
+<p>案例1:创建一个目录 /home/dog<br>    mkdir  /home/dog</p>
+<p>案例2:创建多级目录 /home/animal/tiger</p>
+<p>mkdir  <strong>-p</strong>  /home/animal/tiger </p>
+<h4 id="5-4-5-rmdir指令-remove-directory"><a href="#5-4-5-rmdir指令-remove-directory" class="headerlink" title="5.4.5 rmdir指令 [remove directory]"></a>5.4.5 rmdir指令 [remove directory]</h4><p> 说明</p>
+<p>​      rmdir指令<strong>删除空目录</strong></p>
+<p>基本语法</p>
+<p>​      rmdir  [选项]  要删除的空目录</p>
+<p> 应用实例</p>
+<p>​      案例1:删除一个目录 /home/dog</p>
+<p>​      rmdir  /home/dog  [要求 /home/dog 空目录]</p>
+<p> 使用细节</p>
+<p>​      rmdir 删除的是空目录，如果目录下有内容时无法删除的。</p>
+<p>​      提示：如果需要删除非空目录，需要使用  rm -rf 要删除的目录</p>
+<p>​      比如：</p>
+<p>   rm -rf /home/dog </p>
+<p>​      r: 表示递归删除，就是将该目录下的文件和子目录全部删除</p>
+<p>​      f: 表示强制删除，就是不需询问</p>
+<h4 id="5-4-6-touch指令"><a href="#5-4-6-touch指令" class="headerlink" title="5.4.6 touch指令"></a>5.4.6 touch指令</h4><p>touch指令创建空文件， 还可以更新文件的修改时间</p>
+<p>  基本语法</p>
+<p>​       touch 文件名称</p>
+<p> 应用实例</p>
+<p>​      案例1: 创建一个空文件 hello.txt</p>
+<p>​      touch  hello.txt </p>
+<p>​      说明：如果文件存在，则表示刷新该文件的修改时间.</p>
+<p>cp指令[copy 拷贝]</p>
+<h4 id="5-4-7-cp-指令拷贝文件到指定目录"><a href="#5-4-7-cp-指令拷贝文件到指定目录" class="headerlink" title="5.4.7 cp 指令拷贝文件到指定目录"></a>5.4.7 cp 指令拷贝文件到指定目录</h4><p>基本语法</p>
+<p>​       cp [选项]  source【源】  dest【目的文件】</p>
+<p>常用选项</p>
+<p>​      -r ：递归复制整个文件夹</p>
+<p>应用实例</p>
+<p>​       案例1: 将 /home/aaa.txt 拷贝到  /home/bbb 目录下 cp /home/aaa.txt   /home/bbb.txt</p>
+<p>​       案例2: 递归复制整个文件夹，举例， 将 /home 整个目录拷贝 /opt  cp -r /home/ /opt/</p>
+<p>使用细节</p>
+<p>​       强制覆盖不提示的方法：\cp</p>
+<h4 id="5-4-8-rm指令"><a href="#5-4-8-rm指令" class="headerlink" title="5.4.8 rm指令"></a>5.4.8 rm指令</h4><p>rm 指令移除文件或目录</p>
+<p>基本语法</p>
+<p>​       rm  [选项]  要删除的文件或目录</p>
+<p>常用选项</p>
+<p>​      -r ：递归删除整个文件夹</p>
+<p>​      -f ： 强制删除不提示</p>
+<p>应用实例</p>
+<p>​       案例1: 将 /home/aaa.txt 删除<br>​       rm  /home/aaa.txt</p>
+<p>​       案例2: 递归删除整个文件夹 /home/bbb<br>​       rm –r  /home/bbb </p>
+<p>使用细节</p>
+<p>​       强制删除不提示的方法：带上 -f 参数即可</p>
+<p>​      rm –rf  /home/bbb</p>
+<h4 id="5-4-9-mv指令"><a href="#5-4-9-mv指令" class="headerlink" title="5.4.9 mv指令"></a>5.4.9 mv指令</h4><p>mv 移动文件与目录或重命名 </p>
+<p>基本语法</p>
+<p>​       mv  oldNameFile newNameFile     (功能描述：重命名)</p>
+<p>​       mv /temp/movefile /targetFolder (功能描述：移动文件或目录)</p>
+<p> 应用实例</p>
+<p>​       案例1: 将 /home/aaa.txt 文件 重新命名为 pig.txt  mv aaa.txt  pig.txt   如果操作时两个文件在同一个目录下并且没有bbb.txt, 就是将aaa.txt重命名为pig.txt</p>
+<h4 id="5-4-10-cat指令"><a href="#5-4-10-cat指令" class="headerlink" title="5.4.10      cat指令"></a>5.4.10      cat指令</h4><p>cat 查看文件内容 </p>
+<p>基本语法</p>
+<p>​       cat  [选项] 要查看的文件</p>
+<p>常用选项</p>
+<p>​      -n ：显示行号  </p>
+<p>应用实例</p>
+<p>​       案例1:   /ect/profile  文件内容，并显示行号</p>
+<p>   cat  -n  /etc/profile  |   more</p>
+<p>   说明：如果需要一行行，输入 enter </p>
+<p>如果需要翻页 ，输入空格键.</p>
+<p>如果需要退出，输入 q</p>
+<p>使用细节</p>
+<p>​       cat <strong>只能浏览文件，而不能修改文件</strong>，为了浏览方便，一般会带上 管道命令 | more</p>
+<p>cat  xxx.txt | more  (把cat xxx.txt 输出结果交给 more 处理) </p>
+<h4 id="5-4-11-more指令"><a href="#5-4-11-more指令" class="headerlink" title="5.4.11   more指令"></a>5.4.11   more指令</h4><p>more指令是一个基于VI编辑器的文本过滤器，它以全屏幕的方式按页显示文本文件的内容。more指令中内置了若干快捷键，详见操作说明</p>
+<p> 基本语法</p>
+<p>​       more 要查看的文件</p>
+<p>操作说明</p>
+<p>应用实例</p>
+<p>​      案例: 采用more查看文件 </p>
+<p>​      /etc/profile</p>
+<p>快捷键</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空白键 (space)</td>
+<td>代表向下翻一页；</td>
+</tr>
+<tr>
+<td>Enter</td>
+<td>代表向下翻『一行』；</td>
+</tr>
+<tr>
+<td>q</td>
+<td>代表立刻离开   more ，不再显示该文件内容。</td>
+</tr>
+<tr>
+<td>Ctrl+F</td>
+<td>向下滚动一屏</td>
+</tr>
+<tr>
+<td>Ctrl+B</td>
+<td>返回上一屏</td>
+</tr>
+<tr>
+<td>=</td>
+<td>输出当前行的行号</td>
+</tr>
+<tr>
+<td>:f</td>
+<td>输出文件名和当前行的行号</td>
+</tr>
+</tbody>
+</table>
+<h4 id="5-4-12-less指令"><a href="#5-4-12-less指令" class="headerlink" title="5.4.12      less指令"></a>5.4.12      less指令</h4><p>less指令用来分屏查看文件内容，它的功能与more指令类似，但是比more指令更加强大，支持各种显示终端。less指令在显示文件内容时，并不是一次将整个文件加载之后才显示，而是根据显示需要加载内容，对于显示大型文件具有较高的效率。</p>
+<p>基本语法</p>
+<p>​       less 要查看的文件</p>
+<p>操作说明和快捷键</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空白键/[pagedown]</td>
+<td>向下翻一页</td>
+</tr>
+<tr>
+<td>pageup</td>
+<td>向上翻一页</td>
+</tr>
+<tr>
+<td>q/ ctrl + c</td>
+<td>离开less程序</td>
+</tr>
+</tbody>
+</table>
+<p>应用实例</p>
+<p>​      案例: 采用less查看一个</p>
+<p>​      大文件文件 </p>
+<h4 id="5-4-13-echo指令"><a href="#5-4-13-echo指令" class="headerlink" title="5.4.13      echo指令"></a>5.4.13      echo指令</h4><p> echo输出内容到控制台。</p>
+<p>基本语法</p>
+<p>​       echo   选项  输出内容</p>
+<p>应用实例</p>
+<p>​      案例: 使用echo 指令输出环境变量，比如 PATH</p>
+<p>echo  $PATH</p>
+<p>引出内容</p>
+<p>查看系统的所有环境变量</p>
+<p>env </p>
+<p>修改环境变量</p>
+<p>vi /etc/profile [系统的环境变量]</p>
+<h4 id="5-4-14-head指令"><a href="#5-4-14-head指令" class="headerlink" title="5.4.14      head指令"></a>5.4.14      head指令</h4><p>head用于显示文件的开头部分内容，默认情况下head指令显示文件的前10行内容</p>
+<p>基本语法</p>
+<p>​       head 文件   (功能描述：查看文件头10行内容)</p>
+<p>​       head -n 5 文件      (功能描述：查看文件头5行内容，5可以是任意行数)</p>
+<p>应用实例</p>
+<p>​      案例: 查看/etc/profile 的前面5行代码</p>
+<p>​      head  -n  5   /etc/profile</p>
+<h4 id="5-4-15-tail指令"><a href="#5-4-15-tail指令" class="headerlink" title="5.4.15    tail指令"></a>5.4.15    tail指令</h4><p> tail用于输出文件中尾部的内容，默认情况下tail指令显示文件的后10行内容。</p>
+<p>基本语法</p>
+<p>​       1) tail  文件     （功能描述：查看文件头10行内容）</p>
+<p>​       2) tail  -n 5 文件    （功能描述：查看文件头5行内容，5可以是任意行数）</p>
+<p>​       3) tail  -f  文件       （功能描述：实时追踪该文档的所有更新） </p>
+<h4 id="5-4-16-gt-指令-和-gt-gt-指令"><a href="#5-4-16-gt-指令-和-gt-gt-指令" class="headerlink" title="5.4.16      &gt; 指令 和 &gt;&gt; 指令"></a>5.4.16      &gt; 指令 和 &gt;&gt; 指令</h4><blockquote>
+<p>输出重定向和 &gt;&gt; 追加</p>
+</blockquote>
+<p>基本语法</p>
+<p>​     1) ls -l &gt;文件          （功能描述：列表的内容写入文件a.txt中（覆盖写））</p>
+<p>​     2) ls -al &gt;&gt;文件             （功能描述：列表的内容追加到文件aa.txt的末尾）</p>
+<p>​     3) cat 文件1 &gt; 文件2 （功能描述：将文件1的内容覆盖到文件2）</p>
+<p>​     4) echo “内容”&gt;&gt; 文件</p>
+<p> 应用实例</p>
+<p>​      案例1: 将 /home 目录下的文件列表 写入到 /home/info.txt 中</p>
+<p>​     <strong>ls</strong> –l  /home/   &gt;  /home/info.txt  [如果文件不存在，则会自动创建]</p>
+<p>​      案例2: 将当前日历信息 追加到  /home/mycal 文件中 </p>
+<p>​     date  &gt;&gt; /home/mycal</p>
+<h4 id="5-4-17-ln-指令-link"><a href="#5-4-17-ln-指令-link" class="headerlink" title="5.4.17      ln 指令 (link)"></a>5.4.17      ln 指令 (link)</h4><p>  **软链接也成为符号链接，类似于windows里的快捷方式，主要存放了链接其他文件的路径</p>
+<p><strong>基本语法</strong></p>
+<p>​     ln -s 原文件或目录  软链接名（功能描述：给原文件创建一个软链接)</p>
+<p><strong>应用实例</strong></p>
+<p>​      案例1: 在/home 目录下创建一个软连接 linkToRoot，连接到/root目录</p>
+<p>​      <strong>ln  -s  /root/  linkToRoot</strong></p>
+<p>​      案例2: 删除软连接 <strong>linkToRoot</strong></p>
+<p>​      rm –rf  linkToRoot </p>
+<p><strong>细节说明</strong></p>
+<p>   当我们使用pwd指令查看目录时，仍然看到的是软链接所在目录。</p>
+<h4 id="5-4-18-history指令"><a href="#5-4-18-history指令" class="headerlink" title="5.4.18       history指令"></a>5.4.18       history指令</h4><p>  查看已经执行过历史命令,也可以执行历史指令</p>
+<p><strong>基本语法</strong></p>
+<p>​     <strong>history</strong>      <strong>（功能描述：查看已经执行过历史命令）</strong></p>
+<p><strong>应用实例</strong></p>
+<p>​     案例1: 显示所有的历史命令</p>
+<p><strong>history</strong>               </p>
+<p>​     案例2: 显示最近使用过的10个指令。</p>
+<p><strong>history 10</strong></p>
+<p>   案例3: 执行历史编号为5的指令  !5</p>
+<h3 id="5-5-时间日期类"><a href="#5-5-时间日期类" class="headerlink" title="5.5     时间日期类"></a>5.5     时间日期类</h3><h4 id="5-5-1-date指令-显示当前日期"><a href="#5-5-1-date指令-显示当前日期" class="headerlink" title="5.5.1 date指令-显示当前日期"></a>5.5.1 date指令-显示当前日期</h4><p>基本语法</p>
+<p>​     1) date      （功能描述：显示当前时间）</p>
+<p>​     2) date +%Y   （功能描述：显示当前年份）</p>
+<p>​     3) date +%m   （功能描述：显示当前月份）</p>
+<p>​     4) date +%d    （功能描述：显示当前是哪一天）</p>
+<p>​     5) date “+%Y-%m-%d %H:%M:%S”（功能描述：显示年月日时分秒）</p>
+<p>应用实例</p>
+<p>​      案例1: 显示当前时间信息</p>
+<p>date</p>
+<p>​      案例2: 显示当前时间年月日 </p>
+<p>date  “%Y-%m-%d”</p>
+<p>​      案例3: 显示当前时间年月日时分秒</p>
+<p>date  “%Y-%m-%d %H:%M:%S”</p>
+<h4 id="5-5-2-使用date指令设置最新时间"><a href="#5-5-2-使用date指令设置最新时间" class="headerlink" title="5.5.2 使用date指令设置最新时间"></a>5.5.2 使用date指令设置最新时间</h4><p>基本语法</p>
+<p>​      date  -s  字符串时间</p>
+<p> 应用实例</p>
+<p>​      案例1: 设置系统当前时间 ， 比如设置成 2020-11-11 11:22:22      date -s “2020-11-11 11:22:22”</p>
+<h4 id="5-5-3-cal指令"><a href="#5-5-3-cal指令" class="headerlink" title="5.5.3 cal指令"></a>5.5.3 cal指令</h4><p><strong>查看日历指令</strong></p>
+<p><strong>基本语法</strong></p>
+<p>​      <strong>cal  选项 （功能描述：不加选项，显示本月日历）</strong></p>
+<p><strong>应用实例</strong></p>
+<p>​      <strong>案例1: 显示当前日历</strong></p>
+<p><strong>cal</strong>  </p>
+<p>​      <strong>案例2:  显示2020年日历</strong></p>
+<p><strong>cal  2020</strong></p>
+<h3 id="5-6-搜索查找类"><a href="#5-6-搜索查找类" class="headerlink" title="5.6     搜索查找类"></a>5.6     搜索查找类</h3><h4 id="5-6-1-find指令"><a href="#5-6-1-find指令" class="headerlink" title="5.6.1 find指令"></a>5.6.1 find指令</h4><p>  <strong>find</strong>指令将从指定目录向下递归地遍历其各个子目录，将满足条件的文件或者目录显示在终端</p>
+<p><strong>基本语法</strong></p>
+<p>​      <strong>find  [搜索范围</strong>]  <strong>[选项]</strong></p>
+<p><strong>选项说明</strong></p>
+<p><img src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image102.jpg" alt="img"></p>
+<p> <strong>应用实例</strong></p>
+<p>​      <strong>案例1: 按文件名：根据名称查找/home目录下的hello.txt文件</strong></p>
+<p>​      <strong>find  /home   -name  hello.txt</strong> </p>
+<p>​     案例2：按拥有者：查找/opt目录下，用户名称为 nobody的文件       <strong>find  /opt    -user  nobody</strong></p>
+<p>​      案例3：查找整个linux系统下大于10M的文件<strong>（+n 大于  -n小于   n等于)</strong></p>
+<p>​      <strong>find   /  -size   +10M</strong></p>
+<h4 id="5-6-2-locate指令"><a href="#5-6-2-locate指令" class="headerlink" title="5.6.2 locate指令"></a>5.6.2 locate指令</h4><p><strong>说明</strong>  </p>
+<p><strong>locate</strong>指令可以快速定位文件路径。<strong>locate</strong>指令利用事先建立的系统中所有文件名称及路径的<strong>locate</strong>数据库实现快速定位给定的文件。<strong>Locate</strong>指令无需遍历整个文件系统，查询速度较快。为了保证查询结果的准确度，管理员必须定期更新<strong>locate</strong>时刻。</p>
+<p><strong>基本语法</strong></p>
+<p>​      <strong>locate</strong> <strong>搜索文件</strong></p>
+<p> <strong>特别说明</strong></p>
+<p>由于<strong>locate</strong>指令基于数据库进行查询，所以第一次运行前，必须使用<strong>updatedb</strong>指令创建<strong>locate</strong>数据库。</p>
+<p>注意：如果没有locate指令的话，需要：</p>
+<ol>
+<li>执行一下命令安装以后就可以locate XXX了</li>
+<li>yum install mlocate</li>
+<li>sudo updatedb</li>
+<li>locate  *.doc</li>
+</ol>
+<p><strong>应用实例</strong></p>
+<p>​      案例1: 请使用<strong>locate </strong>指令快速定位hello.txt文件所在目录 locate hello.txt</p>
+<h4 id="5-6-3-grep指令和-管道符号"><a href="#5-6-3-grep指令和-管道符号" class="headerlink" title="5.6.3 grep指令和 管道符号 |"></a>5.6.3 grep指令和 管道符号 |</h4><p> 说明</p>
+<p> <strong>grep</strong> <strong>过滤查找</strong> <strong>，</strong> 管道符，“|”，表示将前一个命令的处理结果输出传递给后面的命令处理。</p>
+<p> <strong>基本语法</strong></p>
+<p>​      grep 选项 查找内容 源文件</p>
+<p> <strong>常用选项</strong></p>
+<p>​    cat  a.txt | grep -ni yes              -n 表示显示查找到的行号  -i表示忽略大小写。</p>
+<p>​    grep -ni yes a.txt</p>
+<p>  <strong>应用实例</strong></p>
+<p>​      <strong>案例</strong>1:请在 <strong>/etc/profile</strong> 文件中，查找  <strong>“if”</strong>  所在行，并且显示行号</p>
+<p>​         <strong>grep</strong> –n   if  /etc/profile  [<strong>在/etc/profile</strong> 中查找 <strong>if</strong> ,并显示行，区别大小写]</p>
+<p>​         <strong>grep</strong> <strong>–</strong>ni   if  /etc/profile  [<strong>在/etc/profile</strong>中查找 <strong>if ,</strong>并显示行，不区别大小写]</p>
+<p>案例2: 配合管道 | 使用案例，查看当前服务器有没有 sshd 服务在监听</p>
+<p>netstat -anp | grep sshd</p>
+<h3 id="5-7-压缩和解压类"><a href="#5-7-压缩和解压类" class="headerlink" title="5.7   压缩和解压类"></a>5.7   压缩和解压类</h3><h4 id="5-7-1-gzip-gunzip-指令"><a href="#5-7-1-gzip-gunzip-指令" class="headerlink" title="5.7.1 gzip/gunzip 指令"></a>5.7.1 gzip/gunzip 指令</h4><p> gzip 用于压缩文件， gunzip 用于解压的</p>
+<p>基本语法</p>
+<p>​      gzip 文件    （功能描述：压缩文件，只能将文件压缩为*.gz文件）</p>
+<p>​      gunzip 文件.gz   （功能描述：解压缩文件命令）   </p>
+<p> 应用实例</p>
+<p>​      案例1: gzip压缩， 将 /home下的 hello.txt文件进行压缩      gzip hello.txt</p>
+<p>​      案例2: gunzip压缩， 将 /home下的 hello.txt.gz 文件进行解压缩       gunzip hello.txt.gz</p>
+<h4 id="5-7-2-zip-unzip-指令"><a href="#5-7-2-zip-unzip-指令" class="headerlink" title="5.7.2 zip/unzip 指令"></a>5.7.2 zip/unzip 指令</h4><p><strong>zip</strong> <strong>用于压缩文件，</strong> <strong>unzip</strong> <strong>用于解压的，这个在项目打包发布中很有用的</strong></p>
+<p>Linux系统没有自带的压缩解压工具；需要我们自己安装；当用到zip或者unzip如果没有安装就会出现unzip: Command Not Found 或 zip: Command Not Found;出现这个是因为没有安装unzip和zip；</p>
+<h5 id="1、ubuntu-apt-get安装"><a href="#1、ubuntu-apt-get安装" class="headerlink" title="1、ubuntu apt-get安装"></a>1、ubuntu apt-get安装</h5><p>   apt-get install zip</p>
+<h5 id="2、centOS-yum安装"><a href="#2、centOS-yum安装" class="headerlink" title="2、centOS yum安装"></a>2、centOS yum安装</h5><p>yum install -y unzip zip  </p>
+<p><strong>基本语法</strong></p>
+<p>​      zip      [选项] XXX.zip  <strong>需要压缩的内容（功能描述：压缩文件和目录的命令）</strong></p>
+<p>​      unzip [选项] XXX.zip<strong>（功能描述：解压缩文件）</strong></p>
+<p><strong>zip </strong>常用选项</p>
+<p>​      <strong>-r</strong>：递归压缩，即压缩目录</p>
+<p> <strong>unzip</strong>的常用选项</p>
+<p>​     -d&lt;目录<strong>&gt; </strong>：指定解压后文件的存放目录</p>
+<p><strong>应用实例</strong></p>
+<p>​      <strong>案例1</strong>: 将 /home下的 所有文件进行压缩成 <strong>mypackage.zip</strong>  [退出home]</p>
+<p>​      zip  -r   mypackage.zip  /home/</p>
+<p>​      <strong>案例2:</strong>  将 <strong>mypackge.zip</strong> 解压到 <strong>/opt/tmp</strong> 目录下</p>
+<p>​      unzip <strong>–</strong>d  /opt/tmp  mypackage.zip   [如果/opt/tmp 不存在，会自动创建]</p>
+<h4 id="5-7-3-tar-指令"><a href="#5-7-3-tar-指令" class="headerlink" title="5.7.3 tar 指令"></a>5.7.3 tar 指令</h4><p><strong>基本说明</strong></p>
+<p> <strong>tar</strong> <strong>指令</strong> <strong>是打包指令，最后打包后的文件是</strong> <strong>.tar.gz</strong> <strong>的文件。</strong> [可以压缩，和解压]</p>
+<p><strong>基本语法</strong></p>
+<p>tar  [选项]  XXX.tar.gz 打包的内容/目录 (功能描述：打包目录，压缩后的文件格式.tar.gz)</p>
+<p><strong>选项说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td>产生.tar打包文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示详细信息</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定压缩后的文件名</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>打包同时压缩</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解压.tar文件</td>
+</tr>
+</tbody>
+</table>
+<p>一般打包用 tar -zcvf ;   解压用 tar -zxvf </p>
+<p> <strong>应用实例</strong></p>
+<p>案例1:    压缩多个文件，将 /home/a1.txt 和 /home/a2.txt 压缩成  a.tar.gz    </p>
+<p>​       tar  -zcvf  a.tar.gz  a1.txt  a2.txt  [注意，路径要写清楚]</p>
+<p> 案例2:  将/home的文件夹 压缩成 <strong>myhome.tar.gz</strong></p>
+<p>   tar  -zcvf   myhome.tar.gz   /home/ [注意，路径写清楚]</p>
+<p>  案例3:将 a.tar.gz 解压到当前目录</p>
+<p>   tar -zxvf  a.tar.gz</p>
+<p>案例4: 将myhome.tar.gz  解压到 /opt/tmp2目录下【-C】</p>
+<p>​      tar -zxvf myhome.tar.gz  -C  /opt/tmp2  注意; /opt/tmp2事先需要创建好</p>
+<h2 id="6-组管理和权限管理"><a href="#6-组管理和权限管理" class="headerlink" title="6   组管理和权限管理"></a>6   组管理和权限管理</h2><h3 id="6-1-Linux组基本介绍"><a href="#6-1-Linux组基本介绍" class="headerlink" title="6.1     Linux组基本介绍"></a>6.1     Linux组基本介绍</h3><p>在linux中的每个用户必须属于一个组，不能独立于组外。在linux中每个文件</p>
+<p>有所有者、所在组、其它组的概念。</p>
+<p>1) 所有者</p>
+<p>2) 所在组</p>
+<p>3) 其它组</p>
+<p>4) 改变用户所在的组</p>
+<p>示意图：</p>
+<p><img src="image/1539173402314.png" alt="1539173402314"></p>
+<h3 id="6-2-文件-目录的所有者"><a href="#6-2-文件-目录的所有者" class="headerlink" title="6.2     文件/目录的所有者"></a>6.2     文件/目录的所有者</h3><p>一般为文件的创建者,谁创建了该文件，就自然的成为该文件的所有者。</p>
+<h4 id="6-2-1-查看文件的所有者"><a href="#6-2-1-查看文件的所有者" class="headerlink" title="6.2.1 查看文件的所有者"></a>6.2.1 查看文件的所有者</h4><p>指令：ls –ahl</p>
+<p>应用实例 :创建一个组police,再创建一个用户tom,将tom放在police组 ,然后使用 tom来创建一个文件 ok.txt，看看情况如何</p>
+<p> <img src="image/1539172319335.png" alt="1539172319335"></p>
+<h4 id="6-2-2-修改文件所有者"><a href="#6-2-2-修改文件所有者" class="headerlink" title="6.2.2 修改文件所有者"></a>6.2.2 修改文件所有者</h4><p>指令：chown 用户名 文件名 </p>
+<p> 应用案例</p>
+<p>​      要求：使用root 创建一个文件apple.txt ，然后将其所有者修改成 tom  </p>
+<p><img src="image/1539172534398.png" alt="1539172534398"></p>
+<p> 一个文件的所有者是tom。 但是这个文件不一定是tom所在的组</p>
+<h3 id="6-3-文件-目录的所在组"><a href="#6-3-文件-目录的所在组" class="headerlink" title="6.3     文件/目录的所在组"></a>6.3     文件/目录的所在组</h3><h4 id="6-3-1-修改文件所在的组"><a href="#6-3-1-修改文件所在的组" class="headerlink" title="6.3.1 修改文件所在的组"></a>6.3.1 修改文件所在的组</h4><p> 基本指令</p>
+<p>chgrp 组名 文件名</p>
+<p> 应用实例</p>
+<p>使用root用户创建文件 orange.txt ,看看当前这个文件属于哪个组【root】，然后将这个文件所在组，修改到 police组。</p>
+<ol>
+<li><p>touch orange.txt</p>
+</li>
+<li><p>chgrp  police  orange.txt </p>
+</li>
+</ol>
+<p><img src="image/1539172838742.png" alt="1539172838742"></p>
+<h4 id="6-3-2-改变用户所在组"><a href="#6-3-2-改变用户所在组" class="headerlink" title="6.3.2 改变用户所在组"></a>6.3.2 改变用户所在组</h4><p>在添加用户时，可以指定将该用户添加到哪个组中，同样的用root的管理权限可以改变某个用户所在的组。</p>
+<p> 改变用户所在组</p>
+<p> 1) usermod   –g   组名  用户名</p>
+<p> 2) usermod   –d   目录名  用户名  改变该用户登陆的初始目录。</p>
+<p>应用实例</p>
+<p>创建一个土匪组（bandit）将 tom 这个用户从原来所在的police组，修改到 bandit(土匪) 组</p>
+<p><strong>Usermod  -g  bandit  tom</strong></p>
+<p> <img src="image/1539173280573.png" alt="1539173280573"></p>
+<h3 id="6-4-权限的基本介绍"><a href="#6-4-权限的基本介绍" class="headerlink" title="6.4     权限的基本介绍"></a>6.4     权限的基本介绍</h3><p><img src="image/1539173847374.png" alt="1539173847374"></p>
+<p><img src="image/1539173361634.png" alt="1539173361634"></p>
+<h3 id="6-5-rwx权限详解"><a href="#6-5-rwx权限详解" class="headerlink" title="6.5     rwx权限详解"></a>6.5     rwx权限详解</h3><p><img src="image/1539174109185.png" alt="1539174109185"></p>
+<h3 id="6-6-修改权限-chmod"><a href="#6-6-修改权限-chmod" class="headerlink" title="6.6     修改权限-chmod"></a>6.6     修改权限-chmod</h3><p><img src="image/1539174985379.png" alt="1539174985379"></p>
+<p> <img src="image/1539175594856.png" alt="1539175594856"></p>
+<p><img src="image/1539175686868.png" alt="1539175686868"></p>
+<p><img src="image/1539175795336.png" alt="1539175795336"></p>
+<p><img src="image/1539175015643.png" alt="1539175015643"></p>
+<p><img src="image/1539175978948.png" alt="1539175978948"></p>
+<h3 id="6-7-修改文件所有者-chown"><a href="#6-7-修改文件所有者-chown" class="headerlink" title="6.7     修改文件所有者-chown"></a>6.7     修改文件所有者-chown</h3><p>9.7.1 基本介绍</p>
+<p>chown  newowner  file  改变文件的所有者</p>
+<p>chown  newowner:newgroup  file  改变用户的所有者和所有组</p>
+<p>-R   如果是目录 则使其下所有子文件或目录递归生效</p>
+<p>案例演示：</p>
+<p>1) 请将 /home/abc.txt 文件的所有者修改成 tom<br>        chown   tom  /home/abc.txt</p>
+<p><img src="image/1539176168104.png" alt="1539176168104"></p>
+<p>2) 请将 /home/kkk 目录下所有的文件和目录的所有者都修改成tom<br>        chown –R tom  /home/kkk  或者  chown tom –R   /home/kkk</p>
+<p>3) 将home下的所有文件和目录的所有者都改成 tom，将所在组改成police<br>        chown –R  tom:police   /home/   或者   chown tom:police –R    /home/</p>
+<h3 id="6-8-修改文件所在组-chgrp"><a href="#6-8-修改文件所在组-chgrp" class="headerlink" title="6.8     修改文件所在组-chgrp"></a>6.8     修改文件所在组-chgrp</h3><h4 id="6-8-1-基本介绍"><a href="#6-8-1-基本介绍" class="headerlink" title="6.8.1 基本介绍"></a>6.8.1 基本介绍</h4><p>chgrp newgroup file  改变文件的所有组</p>
+<h4 id="6-8-2-案例演示"><a href="#6-8-2-案例演示" class="headerlink" title="6.8.2 案例演示"></a>6.8.2 案例演示</h4><p>1) 请将 /home/abc .txt 文件的所在组修改成 shaolin (少林)<br>        chgrp  shaolin  /home/abc.txt</p>
+<p>2) 请将 /home/kkk 目录下所有的文件和目录的所在组都修改成 shaolin(少林)<br>        chgrp  -R  shaolin /home/kkk </p>
+<h3 id="6-9-最佳实践-警察和土匪游戏"><a href="#6-9-最佳实践-警察和土匪游戏" class="headerlink" title="6.9     最佳实践-警察和土匪游戏"></a>6.9     最佳实践-警察和土匪游戏</h3><p>police ， bandit </p>
+<p>jack, jerry: 警察</p>
+<p>xh, xq: 土匪</p>
+<p>1) 创建组 </p>
+<p>groupadd  police</p>
+<p>groupadd  bandit</p>
+<p>2) 创建用户 </p>
+<p>useradd  -g police jack</p>
+<p>useradd  -g police jerry</p>
+<p>useradd  -g bandit xh</p>
+<p>useradd  -g bandit xq</p>
+<p>给分配密码</p>
+<p>3) jack 创建一个文件jack.txt，自己可以读写，本组人可以读，其它组没人任何权限</p>
+<p>登录后</p>
+<p>chmod  640  jack.txt</p>
+<p><strong>提醒</strong>：如果我们希望同组的人可以读 jack.txt 文件，则需要将 jack 的家目录的权限打开.</p>
+<p>chmod  g=rx  /home/jack</p>
+<p>4) jack 修改该文件，让其它组人可以读, 本组人可以读写</p>
+<p>chmod  g=rw, o=r  jack.txt</p>
+<p>5) xh 投靠 警察，看看是否可以读写.(测试后，是ok, 注意需要重新登录)</p>
+<p>usermod  -g police xh</p>
+<h3 id="6-10-课后练习"><a href="#6-10-课后练习" class="headerlink" title="6.10 课后练习"></a>6.10 课后练习</h3><p><img src="image/1539603664891.png" alt="1539603664891"></p>
+<h2 id="7-定时任务调度"><a href="#7-定时任务调度" class="headerlink" title="7   定时任务调度"></a>7   定时任务调度</h2><h3 id="7-1-crond-任务调度"><a href="#7-1-crond-任务调度" class="headerlink" title="7.1 crond 任务调度"></a>7.1 crond 任务调度</h3><p>crontab 进行 定时任务的设置。</p>
+<h4 id="7-1-1-概述"><a href="#7-1-1-概述" class="headerlink" title="7.1.1   概述"></a>7.1.1   概述</h4><p>​      任务调度：是指系统在某个时间执行的特定的命令或程序。 </p>
+<p>​      任务调度分类：1.系统工作：有些重要的工作必须周而复始地执行。如病毒扫描等</p>
+<p>​       2.个别用户工作：个别用户可能希望执行某些程序，比如对mysql数据库的备份。</p>
+<h4 id="7-1-2-基本语法"><a href="#7-1-2-基本语法" class="headerlink" title="7.1.2   基本语法"></a>7.1.2   基本语法</h4><p>​      crontab [选项]</p>
+<h4 id="7-1-3-常用选项"><a href="#7-1-3-常用选项" class="headerlink" title="7.1.3   常用选项"></a>7.1.3   常用选项</h4><p><img src="image/1539603863048.png" alt="1539603863048"></p>
+<p><strong>注意:</strong> service crond restart 重启任务调度</p>
+<h4 id="7-1-4-快速入门"><a href="#7-1-4-快速入门" class="headerlink" title="7.1.4   快速入门"></a>7.1.4   快速入门</h4><p>​      设置任务调度文件：/etc/crontab</p>
+<p>​      设置个人任务调度。执行crontab –e  命令。</p>
+<p>​       接着输入任务到调度文件<br>​               如：<strong><em>/1 \</em> <em> </em> * ls</strong> <strong>–l  /etc/ &gt; /tmp/to.txt</strong>   </p>
+<p>​       意思说每小时的每分钟执行 ls –l /etc/ &gt; /tmp/to.txt命令</p>
+<h4 id="7-1-5-参数细节说明"><a href="#7-1-5-参数细节说明" class="headerlink" title="7.1.5   参数细节说明"></a>7.1.5   参数细节说明</h4><p><img src="image/1539604464800.png" alt="1539604464800"></p>
+<p><img src="image/1539604486753.png" alt="1539604486753"></p>
+<p><img src="image/1539604519216.png" alt="1539604519216"></p>
+<h4 id="7-1-6-应用实例"><a href="#7-1-6-应用实例" class="headerlink" title="7.1.6    应用实例"></a>7.1.6    应用实例</h4><p>1) 案例1：每隔1分钟，就将当前的日期信息，追加到 /tmp/mydate.log 文件中<br> <em>/1 </em> <em> </em> *  date &gt;&gt; /tmp/mydate.log</p>
+<p><img src="image/1539604855019.png" alt="1539604855019"></p>
+<p>案例2：每隔1分钟， 将当前日期和日历都追加到 /home/mycal.log 文件中 </p>
+<p><img src="image/1539606047893.png" alt="1539606047893"></p>
+<p>注意： 一定给 sh 脚本的执行权限.</p>
+<p><img src="image/1539606082285.png" alt="1539606082285"></p>
+<p>案例3:    每天凌晨2:00 将mysql数据库 testdb ，备份到文件中。</p>
+<p>步骤：1， 首先编写一个 脚本 backupdb.sh</p>
+<p>​     /usr/local/mysql/bin/mysqldump -u root -p root testdb &gt; /tmp/mydb.bak</p>
+<p> 步骤2: 给 /home/backupdb.sh 一个可以执行的权限</p>
+<p>chmod  u+x backupdb.sh</p>
+<p>步骤3:  将backupdb.sh 部署到crontab </p>
+<p>crontab -e </p>
+<p>增加</p>
+<p>* 2 <em> </em> *  /home/backupdb.sh </p>
+<p>到此ok!</p>
+<h2 id="8-Linux磁盘分区、挂载"><a href="#8-Linux磁盘分区、挂载" class="headerlink" title="8      Linux磁盘分区、挂载"></a>8      Linux磁盘分区、挂载</h2><h3 id="8-1-分区的基本知识"><a href="#8-1-分区的基本知识" class="headerlink" title="8.1 分区的基本知识"></a>8.1 分区的基本知识</h3><h4 id="8-1-1-分区的方式"><a href="#8-1-1-分区的方式" class="headerlink" title="8.1.1      分区的方式"></a>8.1.1      分区的方式</h4><p>mbr分区:</p>
+<p>1.最多支持四个主分区</p>
+<p>2.系统只能安装在主分区</p>
+<p>3.扩展分区要占一个主分区</p>
+<p>4.MBR最大只支持2TB，但拥有最好的兼容性</p>
+<p>gtp分区:</p>
+<p>1.支持无限多个主分区（但操作系统可能限制，比如 windows下最多128个分区）</p>
+<p>2.最大支持18EB的大容量（1EB=1024 PB，1PB=1024 TB ）</p>
+<p>3.windows7 64位以后支持gtp</p>
+<h4 id="8-1-2-windows下的磁盘分区"><a href="#8-1-2-windows下的磁盘分区" class="headerlink" title="8.1.2      windows下的磁盘分区"></a>8.1.2      windows下的磁盘分区</h4><p><img src="image/1540207264532.png" alt="1540207264532"></p>
+<p> 我的电脑—-&gt;管理———&gt;磁盘管理</p>
+<p><img src="image/1540207286853.png" alt="1540207286853"></p>
+<h3 id="8-2-Linux分区"><a href="#8-2-Linux分区" class="headerlink" title="8.2 Linux分区"></a>8.2 Linux分区</h3><h4 id="8-2-1-原理介绍"><a href="#8-2-1-原理介绍" class="headerlink" title="8.2.1    原理介绍"></a>8.2.1    原理介绍</h4><p>​      Linux来说无论有几个分区，分给哪一目录使用，它归根结底就只有一个根目录，一个独立且唯一的文件结构 , Linux中每个分区都是用来组成整个文件系统的一部分。</p>
+<p>​      Linux采用了一种叫“<strong>载入(mount)</strong>”的处理方法，它的整个文件系统中包含了一整套的文件和目录，且将一个分区和一个目录联系起来。这时要载入的一个分区将使它的存储空间在一个目录下获得。</p>
+<p> 示意图【分区和文件目录】</p>
+<p>  <img src="image/1540208147290.png" alt="1540208147290"></p>
+<h4 id="8-2-2-硬盘说明"><a href="#8-2-2-硬盘说明" class="headerlink" title="8.2.2      硬盘说明"></a>8.2.2      硬盘说明</h4><p>​     Linux硬盘分IDE硬盘和SCSI硬盘，目前基本上是SCSI硬盘</p>
+<p>​     对于IDE硬盘，驱动器标识符为“hdx~”,其中“hd”表明分区所在设备的类型，这里是指IDE硬盘了。“x”为盘号（a为基本盘，b为基本从属盘，c为辅助主盘，d为辅助从属盘）,“~”代表分区，前四个分区用数字1到4表示，它们是主分区或扩展分区，从5开始就是逻辑分区。例，hda3表示为第一个IDE硬盘上的第三个主分区或扩展分区,hdb2表示为第二个IDE硬盘上的第二个主分区或扩展分区。 </p>
+<p>​       对于SCSI硬盘则标识为“sdx~”，SCSI硬盘是用“sd”来表示分区所在设备的类型的，其余则和IDE硬盘的表示方法一样。sdb1 [表示第2块scsi 硬盘的第1个分区]</p>
+<p><img src="image/1540208189705.png" alt="1540208189705"></p>
+<h4 id="8-2-3-查看所有设备-光驱-media，u盘，-硬盘-挂载情况"><a href="#8-2-3-查看所有设备-光驱-media，u盘，-硬盘-挂载情况" class="headerlink" title="8.2.3      查看所有设备(光驱 /media，u盘， 硬盘)挂载情况"></a>8.2.3      查看所有设备(光驱 /media，u盘， 硬盘)挂载情况</h4><p>命令 ：lsblk  或者 lsblk -f        </p>
+<p><img src="image/1540208300176.png" alt="1540208300176"></p>
+<h3 id="8-3-挂载的经典案例"><a href="#8-3-挂载的经典案例" class="headerlink" title="8.3 挂载的经典案例"></a>8.3 挂载的经典案例</h3><h4 id="8-3-1-说明"><a href="#8-3-1-说明" class="headerlink" title="8.3.1   说明"></a>8.3.1   说明</h4><p>我们以增加一块硬盘<strong>1G</strong> 为例来熟悉下磁盘的相关指令和深入理解磁盘分区、挂载、卸载的概念</p>
+<h4 id="8-3-2-增加一块硬盘的步骤"><a href="#8-3-2-增加一块硬盘的步骤" class="headerlink" title="8.3.2      增加一块硬盘的步骤"></a>8.3.2      增加一块硬盘的步骤</h4><ol>
+<li><p>虚拟机添加硬盘   </p>
+<p><strong>点击虚拟机  设置   点击硬盘   点击添加</strong>  </p>
+<p><img src="image/1540210401526.png" alt="1540210401526"></p>
+</li>
+<li><p>分区  <strong>fdisk /dev/sdb</strong></p>
+<p><strong>输入m  回车</strong></p>
+<p><img src="image/1540210573299.png" alt="1540210573299"></p>
+</li>
+</ol>
+<p><strong>输入n 回车后  输入w  回车</strong></p>
+<p><img src="image/1540210602918.png" alt="1540210602918"></p>
+<p><img src="image/1540210650737.png" alt="1540210650737"></p>
+<ol start="3">
+<li>格式化    <strong>mkfs  -t ext4  /dev/sdb1</strong>  </li>
+</ol>
+<p><img src="image/1540210755353.png" alt="1540210755353"></p>
+<p>这样就格式化成功了。</p>
+<p><img src="image/1540210809583.png" alt="1540210809583"></p>
+<ol start="4">
+<li><p>挂载        比如挂载到/home/newdisk文件</p>
+<ol>
+<li><p><strong>mkdir  /home/newdisk</strong></p>
+</li>
+<li><p><strong>mount   /dev/sdb1   /home/newdisk</strong>    注意：不要在/home/newdisk的文件下执行</p>
+</li>
+</ol>
+<p><img src="image/1540211084429.png" alt="1540211084429"></p>
+</li>
+</ol>
+<h4 id="8-3-2-注意"><a href="#8-3-2-注意" class="headerlink" title="8.3.2  注意"></a>8.3.2  <strong>注意</strong></h4><p>这样挂载的文件硬盘分区，在重启后就会自动的卸载。不能长时间维持。</p>
+<h3 id="8-4-设置自动挂载"><a href="#8-4-设置自动挂载" class="headerlink" title="8.4  设置自动挂载"></a>8.4  设置自动挂载</h3><p>​      上面的方式，只是临时生效，当你重启系统，挂载的关系没有， 配置linux的分区表，实现启动时，自动挂载.</p>
+<p><strong>vim /etc/fstab</strong>     添加下图的命令    再  <strong>mount -a</strong>   <strong>意思是挂载所有</strong></p>
+<p><img src="image/1540211675668.png" alt="1540211675668"></p>
+<p>重启后，会自动挂载.</p>
+<p><strong>如果，我们希望卸载，指令</strong></p>
+<p><strong>umount 设备名 | 挂载路径</strong></p>
+<p><strong>umount /dev/sdb1  或者  umount  /home/newdisk</strong>     <strong>注意不要在/home/newdisk文件下去卸载</strong></p>
+<h3 id="8-5-磁盘情况查询"><a href="#8-5-磁盘情况查询" class="headerlink" title="8.5 磁盘情况查询"></a>8.5 磁盘情况查询</h3><h4 id="8-5-1-查询系统整体磁盘使用情况"><a href="#8-5-1-查询系统整体磁盘使用情况" class="headerlink" title="8.5.1      查询系统整体磁盘使用情况"></a>8.5.1      查询系统整体磁盘使用情况</h4><p>基本语法</p>
+<p>​      df -h</p>
+<p>应用实例</p>
+<p>查询系统整体磁盘使用情况</p>
+<p><img src="image/1540212498830.png" alt="1540212498830"></p>
+<h4 id="8-5-2-查询指定目录的磁盘占用情况"><a href="#8-5-2-查询指定目录的磁盘占用情况" class="headerlink" title="8.5.2      查询指定目录的磁盘占用情况"></a>8.5.2      查询指定目录的磁盘占用情况</h4><p> 基本语法</p>
+<p>  du -h  /目录</p>
+<p>  查询指定目录的磁盘占用情况，默认为当前目录</p>
+<p>   -s 指定目录占用大小汇总</p>
+<p>   -h 带计量单位</p>
+<p>   -a 含文件</p>
+<p>   –max-depth=1  子目录深度</p>
+<p>   -c 列出明细的同时，增加汇总值</p>
+<p> 应用实例</p>
+<p>查询 /usr目录的磁盘占用情况，深度为1</p>
+<p> du  -ach  –max-depth= 1  /home 或者 /opt</p>
+<p><img src="image/1540212787424.png" alt="1540212787424"></p>
+<h3 id="8-6-磁盘情况-工作实用指令"><a href="#8-6-磁盘情况-工作实用指令" class="headerlink" title="8.6 磁盘情况-工作实用指令"></a>8.6 磁盘情况-工作实用指令</h3><p>1) 统计/home文件夹下文件的个数<br><strong>ls  -l  /home | grep “^-“ | wc -l</strong>            “^-“  表示以-开头的    -开头就是文件   </p>
+<p>2) 统计/home文件夹下目录的个数<br> <strong>ls –l /home/ | grep “^d” | wc -l</strong>         “^d”  表示以d开头的    d开头就是文件夹   </p>
+<p>3) 统计/home文件夹下文件的个数，包括子文件夹里的<br> <strong>ls –lR /home/ | grep “^-” | wc -l</strong>    </p>
+<p>4) 统计/home文件夹下目录的个数，包括子文件夹里的<br> <strong>ls –lR /home/ | grep “^d” | wc -l</strong></p>
+<p>以树状显示home目录结构  [没有tree指令, 使用yum 来安装]</p>
+<p>先安装</p>
+<p>yum install tree</p>
+<p><img src="image/1540213190480.png" alt="1540213190480"></p>
+<h2 id="9-linux的网络配置"><a href="#9-linux的网络配置" class="headerlink" title="9  linux的网络配置"></a>9  linux的网络配置</h2><h3 id="9-1-linux网络环境配置"><a href="#9-1-linux网络环境配置" class="headerlink" title="9.1 linux网络环境配置"></a>9.1 linux网络环境配置</h3><p><img src="image/1540292474880.png" alt="1540292474880"></p>
+<h3 id="9-2-自动获取"><a href="#9-2-自动获取" class="headerlink" title="9.2      自动获取"></a>9.2      自动获取</h3><p><img src="image/1540293176902.png" alt="1540293176902"></p>
+<p>说明</p>
+<p>1) 配置比较简单</p>
+<p>2) 每次启动linux后，分配的ip地址可能不一样。不适合做服务器</p>
+<h3 id="9-3-配置固定的ip地址"><a href="#9-3-配置固定的ip地址" class="headerlink" title="9.3     配置固定的ip地址"></a>9.3     配置固定的ip地址</h3><p>vim  /etc/sysconfig/network-scripts/ifcfg-eth0</p>
+<p>如果希望配置生效</p>
+<p>1) reboot </p>
+<p>2) service network restart // 重启网络服务</p>
+<h3 id="9-4-修改VMnet8的ip地址"><a href="#9-4-修改VMnet8的ip地址" class="headerlink" title="9.4 修改VMnet8的ip地址"></a>9.4 修改VMnet8的ip地址</h3><ol>
+<li><p>点击vmware的编辑，然后点击虚拟网络编辑器。点击更改设置。点击VMnet8之后就可以修改ip地址</p>
+<p><img src="image/1540293381454.png" alt="1540293381454"></p>
+</li>
+</ol>
+<h3 id="9-5-查看VMnet8的网关地址"><a href="#9-5-查看VMnet8的网关地址" class="headerlink" title="9.5 查看VMnet8的网关地址"></a>9.5 查看VMnet8的网关地址</h3><p>点击vmware的编辑，然后点击虚拟网络编辑器,点击nat设置</p>
+<p><img src="image/1540818973905.png" alt="1540818973905"></p>
+<h3 id="9-6-linux网络环境配置"><a href="#9-6-linux网络环境配置" class="headerlink" title="9.6 linux网络环境配置"></a>9.6 linux网络环境配置</h3><ol>
+<li><p>每次自动连接网络。</p>
+<p> 点击系统 ，再点击首选项，点击网络连接，点击System eth0 的编辑，勾选上自动连接即可。</p>
+<p><strong>缺点</strong>：每次linux启动会自动的获取ip，但是每次获取的ip地址可能不一样。所以在开发的时候我们有可能不知道ip地址是什么。这样不适合做服务器，因为服务器的ip是固定的。</p>
+</li>
+</ol>
+<p><img src="image/1540294451811.png" alt="1540294451811"></p>
+<ol start="2">
+<li><p>指定固定的ip</p>
+<p>直接修改配置文件来指定ip，并可以连接到外网（程序员推荐）。</p>
+</li>
+</ol>
+<p>编辑  vi /etc/sysconfig/network-scripts/ifcfg-eth0   将ip配置为192.168.78.130为例</p>
+<p>ifcfg-eth0 是eth0这个网卡的配置文件。</p>
+<p>在文件中的属性的说明：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEVICE=eth0</td>
+<td>接口名（设备，网卡名）</td>
+</tr>
+<tr>
+<td>HWADDR=00:OC:2x:6x:0x:xx</td>
+<td>MAC地址</td>
+</tr>
+<tr>
+<td>TYPE=Ethernet</td>
+<td>网络类型（通常是Ethernet）</td>
+</tr>
+<tr>
+<td>UUID=…….</td>
+<td>随机ID</td>
+</tr>
+<tr>
+<td>ONBOOT=yes</td>
+<td>系统启动的时候网络接口是否有效（yes/no）yes表示开启</td>
+</tr>
+<tr>
+<td>BOOTPROTO=static</td>
+<td>ip的配置方法[none\</td>
+<td>static\</td>
+<td>bootp\</td>
+<td>dhcp]   不使用ip  \</td>
+<td>使用静态ip（表示ip不变化）\</td>
+<td>bootp协议  \</td>
+<td>DHCP协议(表示自动获取ip)</td>
+</tr>
+<tr>
+<td>IPADDR=192.168.78.130</td>
+<td>IP地址，可以自己设置为自己想要的</td>
+</tr>
+<tr>
+<td>GATEWAY</td>
+<td>网关</td>
+</tr>
+<tr>
+<td>DNS1</td>
+<td>域名解析器（和网关一样即可）</td>
+</tr>
+</tbody>
+</table>
+<p><img src="image/1540295876007.png" alt="1540295876007"></p>
+<p>在修改后保存， 重启网络  service network restart   就修改成功了</p>
+<p><img src="image/1540296087710.png" alt="1540296087710"></p>
+<h2 id="10-进程管理-重要"><a href="#10-进程管理-重要" class="headerlink" title="10  进程管理(重要)"></a>10  进程管理(重要)</h2><h3 id="10-1-基本介绍"><a href="#10-1-基本介绍" class="headerlink" title="10.1 基本介绍"></a>10.1 基本介绍</h3><p>1) 在LINUX中，每个执行的程序（代码）都称为一个进程。每一个进程都分配一个ID号。</p>
+<p>2) 每一个进程，都会对应一个父进程，而这个父进程可以复制多个子进程。例如www服务器</p>
+<p>3) 每个进<strong>程都可能以两种方式存在的。前台</strong> <strong>与后台</strong>，所谓前台进程就是用户目前的屏幕上可以进行操作的。后台进程则是实际在操作，但由于屏幕上无法看到的进程，通常使用后台方式执行[sshd , crond]。 </p>
+<p>4) 一般系统的<strong>服务都是以后台进程的方式存在</strong>，而且都会常驻在系统中。直到关机才才结束。</p>
+<h4 id="10-1-1-显示系统执行的进程"><a href="#10-1-1-显示系统执行的进程" class="headerlink" title="10.1.1      显示系统执行的进程"></a>10.1.1      显示系统执行的进程</h4><p>ps命令是用来查看目前系统中，有哪些正在执行的进程，以及他们的执行状况。可以不加任何的参数</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ps -a</td>
+<td>显示当前终端的所有进程信息</td>
+</tr>
+<tr>
+<td>ps -u</td>
+<td>以用户的格式显示进程信息</td>
+</tr>
+<tr>
+<td>ps -x</td>
+<td>显示后台进程运行的参数</td>
+</tr>
+</tbody>
+</table>
+<p>我们常用ps -aux 显示所有的进程</p>
+<p><img src="image/1540297596773.png" alt="1540297596773"></p>
+<h4 id="10-1-2-ps详解"><a href="#10-1-2-ps详解" class="headerlink" title="10.1.2      ps详解"></a>10.1.2      ps详解</h4><p>指令：ps –aux | grep xxx ，比如我看看有没有sshd服务</p>
+<p>ps -aux | grep sshd    查看sshd进程</p>
+<p>指令说明</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USER</td>
+<td>用户名称</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>进程号</td>
+</tr>
+<tr>
+<td>%CPU</td>
+<td>进程占用CPU的百分比</td>
+</tr>
+<tr>
+<td>%MEM</td>
+<td>进程占用物理内存的百分比</td>
+</tr>
+<tr>
+<td>VSZ</td>
+<td>进程占用的虚拟内存大小（单位：KB）</td>
+</tr>
+<tr>
+<td>RSS</td>
+<td>进程占用的物理内存大小（单位：KB）</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>终端名称,缩写 .</td>
+</tr>
+<tr>
+<td>STAT</td>
+<td>进程状态，其中S-睡眠，s-表示该进程是会话的先导进程，N-表示进程拥有比普通优先级更低的优先级，R-正在运行，D-短期等待，Z-僵死进程，T-被跟踪或者被停止等等</td>
+</tr>
+<tr>
+<td>STARTED</td>
+<td>进程的启动时间</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>CPU时间，即进程使用CPU的总时间</td>
+</tr>
+<tr>
+<td>COMMAND</td>
+<td>启动进程所用的命令和参数，如果过长会被截断显示</td>
+</tr>
+</tbody>
+</table>
+<p>查看父进程 ps -ef 查看父进程    PPID 父进程ID  </p>
+<p><img src="image/1540298696444.png" alt="1540298696444"></p>
+<p>ps -ef | grep  sshd   查看sshd进程的父进程</p>
+<h3 id="10-2-终止进程kill和killall"><a href="#10-2-终止进程kill和killall" class="headerlink" title="10.2  终止进程kill和killall"></a>10.2  终止进程kill和killall</h3><h4 id="10-2-1-介绍"><a href="#10-2-1-介绍" class="headerlink" title="10.2.1   介绍"></a>10.2.1   介绍</h4><p>若是某个进程执行一半需要停止时，或是已消了很大的系统资源时，此时可以考虑停止该进程。使用kill命令来完成此项任务。</p>
+<h4 id="10-2-2-基本语法"><a href="#10-2-2-基本语法" class="headerlink" title="10.2.2      基本语法"></a>10.2.2      基本语法</h4><p>kill  [选项] 进程号（功能描述：通过进程号杀死进程 -9 强制终止）</p>
+<p>killall 进程名称   （功能描述：通过进程名称杀死进程，也支持通配符，这在系统因负载过大而变得很慢时很有用）</p>
+<h4 id="10-2-3-常用选项"><a href="#10-2-3-常用选项" class="headerlink" title="10.2.3      常用选项"></a>10.2.3      常用选项</h4><p>-9 :表示强迫进程立即停止</p>
+<h4 id="10-2-4-实践"><a href="#10-2-4-实践" class="headerlink" title="10.2.4   实践"></a>10.2.4   实践</h4><p>案例1：踢掉某个非法登录用户【mfl】</p>
+<p><img src="image/1540378924187.png" alt="1540378924187"></p>
+<p>kill 3196 就可以杀死上面的mfl登录用户</p>
+<p><img src="image/1540379050427.png" alt="1540379050427"></p>
+<p>案例2: 终止远程登录服务sshd, 在适当时候再次重启sshd服务</p>
+<p>​     我们可以直接取终止远程服务的sshd进程。就不能再有远程登录的用户登录进来</p>
+<p><img src="image/1540379218644.png" alt="1540379218644"></p>
+<p>该mfl用户就不能远程连接上linux了。</p>
+<p><img src="image/1540379252031.png" alt="1540379252031"></p>
+<p>案例3: 终止多个gedit 编辑器【killall 通过进程名称终止进程】</p>
+<p>ps -aux | grep gedit   这里有两个gedit编辑器进程。</p>
+<p><img src="image/1540379665299.png" alt="1540379665299"></p>
+<p>killall  gedit</p>
+<p><img src="image/1540379772260.png" alt="1540379772260"></p>
+<p>案例4：强制杀掉一个终端  对于 bash</p>
+<p>这是一个终端。</p>
+<p><img src="image/1540380070692.png" alt="1540380070692"></p>
+<p>就是这个进程号</p>
+<p><img src="image/1540380102571.png" alt="1540380102571"></p>
+<p>如果直接 kill 3322 是不能杀掉的，因为这是一个重要进程  </p>
+<p><img src="image/1540380168194.png" alt="1540380168194"></p>
+<p>kill -9  对应的bash的进程号，这样就能杀死这个终端进程。</p>
+<p><img src="image/1540380205578.png" alt="1540380205578"> </p>
+<h3 id="10-3-查看进程树-pstree"><a href="#10-3-查看进程树-pstree" class="headerlink" title="10.3 查看进程树 pstree"></a>10.3 查看进程树 pstree</h3><h4 id="10-3-1-基本语法"><a href="#10-3-1-基本语法" class="headerlink" title="10.3.1      基本语法"></a>10.3.1      基本语法</h4><p>pstree [选项] ,可以更加直观的来看进程信息</p>
+<h4 id="10-3-2-常用选项"><a href="#10-3-2-常用选项" class="headerlink" title="10.3.2      常用选项"></a>10.3.2      常用选项</h4><p>-p :显示进程的PID</p>
+<p>-u :显示进程的所属用户</p>
+<p>13.3.3      应用实例：</p>
+<p>1) 案例1：请用树状的形式显示进程的pid </p>
+<p>pstree -p</p>
+<p><img src="image/1540380315173.png" alt="1540380315173"></p>
+<p>案例2：请用树状的形式进程的用户id</p>
+<p>pstree –u</p>
+<p><img src="image/1540380360595.png" alt="1540380360595"></p>
+<p>pstree -pu</p>
+<p><img src="image/1540380390388.png" alt="1540380390388"></p>
+<h3 id="10-4-服务-service-管理"><a href="#10-4-服务-service-管理" class="headerlink" title="10.4 服务(service)管理"></a>10.4 服务(service)管理</h3><p>介绍:</p>
+<p>服务(service) 本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其它程序的请求，比如(mysql , sshd  防火墙等)，因此我们又称为守护进程，是Linux中非常重要的知识点。【原理图】</p>
+<p><img src="image/1540380735771.png" alt="1540380735771"></p>
+<p>service管理指令：</p>
+<p>service  服务名 [start | stop | restart | reload | status]</p>
+<p>在CentOS7.0后 不再使用service ,而是 systemctl</p>
+<p>使用案例：</p>
+<p>1) 查看当前防火墙的状况，关闭防火墙和重启防火墙。</p>
+<p>Service iptables status  只有22号端口打开</p>
+<p><img src="image/1540380940763.png" alt="1540380940763"></p>
+<p>关闭或者启用防火墙后，立即生效。[测试  某个端口即可]<br>        service  iptables  stop ,</p>
+<p><img src="image/1540381029737.png" alt="1540381029737"></p>
+<p> service iptables start</p>
+<p><img src="image/1540381065836.png" alt="1540381065836"></p>
+<p>telnet  ip  端口  可以查看该ip地址的端口是否开启   比如 telnet  192.168.78.130  22</p>
+<p>window10 在控制面板  —- 程序中开启</p>
+<p><img src="image/1540381674828.png" alt="1540381674828"></p>
+<p>这种方式只是临时生效，当重启系统后，还是回归以前对服务的设置。</p>
+<p> 第一种方式 setup 指令，点击空格键就关闭。下次重启就不会自启动这个服务</p>
+<p><img src="image/1540382062721.png" alt="1540382062721"></p>
+<p>这个指令可以看到所有的服务 ls -l /etc/init.d/</p>
+<p><img src="image/1540382273441.png" alt="1540382273441"></p>
+<h4 id="10-4-1-服务的运行级别"><a href="#10-4-1-服务的运行级别" class="headerlink" title="10.4.1 服务的运行级别"></a>10.4.1 服务的运行级别</h4><p>和系统的相似。运行级别说明：  </p>
+<p>1) 0 ：关机 </p>
+<p>2) 1 ：单用户 [类似安全模式， 这个模式可以帮助找回root密码]</p>
+<p>3) 2：多用户状态没有网络服务</p>
+<p>4) 3：多用户状态有网络服务 [<strong>使用最多</strong>]</p>
+<p>5) 4：系统未使用保留给用户</p>
+<p>6) 5：图形界面 【】</p>
+<p>7) 6：系统重启  </p>
+<p><img src="image/1540382601135.png" alt="1540382601135"></p>
+<p>所以我们可以在系统的不同运行级别去设置服务在该运行级别是否自启动。如果希望设置某个服务自启动或关闭永久生效，要使用chkconfig指令。</p>
+<p>chkconfig</p>
+<p>​    可以给每个服务的各个运行级别设置是否自启动。</p>
+<p>​    使用chkconfig修改的服务启动级别，在重启linux后才会生效</p>
+<p>chkconfig –list</p>
+<p><img src="image/1540383151665.png" alt="1540383151665"></p>
+<p>chkconfig –list | grep network  </p>
+<p><img src="image/1540383185789.png" alt="1540383185789"></p>
+<p>chkconfig sshd –list</p>
+<p><img src="image/1540383297885.png" alt="1540383297885"></p>
+<p>我们设置在运行级别为5是关闭sshd服务</p>
+<p>chkconfig  –level 5 sshd off   在重启linux后在5的运行级别就关闭了sshd服务，就不能远程连接该linux</p>
+<p><img src="image/1540383432065.png" alt="1540383432065"></p>
+<p>在所有运行级别下关闭或开启自启动服务  不需要写  –level   比如在所有的运行级别关闭sshd:</p>
+<p>chkconifg  sshd off</p>
+<h3 id="10-5-动态监控进程"><a href="#10-5-动态监控进程" class="headerlink" title="10.5 动态监控进程"></a>10.5 动态监控进程</h3><h4 id="10-5-1-介绍"><a href="#10-5-1-介绍" class="headerlink" title="10.5.1  介绍"></a>10.5.1  介绍</h4><p>top与ps命令很相似。它们都用来显示正在执行的进程。Top与ps最大的不同之处，在于top在执行一段时间可以更新正在运行的的进程(默认每3秒变化一次)。<br> 基本语法：top [选项]</p>
+<h4 id="10-5-3-选项说明"><a href="#10-5-3-选项说明" class="headerlink" title="10.5.3   选项说明"></a>10.5.3   选项说明</h4><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d  秒数</td>
+<td>指定top指令多少秒更新，默认为3秒</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>使top不显示任何闲置和僵死的进程</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>通过指定进程ID来只监控某一个进程</td>
+</tr>
+</tbody>
+</table>
+<p> top 指令的说明</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P</td>
+<td>以cpu的使用率排序，默认就为该指令</td>
+</tr>
+<tr>
+<td>M</td>
+<td>以内存的使用率排序</td>
+</tr>
+<tr>
+<td>N</td>
+<td>以pid排序</td>
+</tr>
+<tr>
+<td>q</td>
+<td>退出top</td>
+</tr>
+</tbody>
+</table>
+<p> <img src="image/1540821566422.png" alt="1540821566422"></p>
+<h3 id="10-6-监控网络状态"><a href="#10-6-监控网络状态" class="headerlink" title="10.6 监控网络状态"></a>10.6 监控网络状态</h3><p> 查看系统网络情况netstat  </p>
+<p>基本语法</p>
+<p>​      netstat [选项]</p>
+<p>选项说明 </p>
+<p>-an  按一定顺序排列输出</p>
+<p>-p  显示哪个进程在调用</p>
+<p><img src="image/1540822350549.png" alt="1540822350549"></p>
+<p>应用案例 </p>
+<p>请查看服务名为 sshd 的服务的信息。</p>
+<p> Netstat –anp | grep sshd</p>
+<p><img src="image/1540822727738.png" alt="1540822727738"></p>
+<p>如果我们希望查看当前系统有哪些端口在监听</p>
+<p>netstat  -tlnp </p>
+<p><img src="image/1540822912883.png" alt="1540822912883"></p>
+<p>问题：Linux常用命令，至少6个(netstat , top , lsblk , find , ps , chkconfig )</p>
+<p>问题：Linux查看内存、磁盘存储、io 读写（iotop）、端口占用、进程等命令</p>
+<p>top </p>
+<p>df –lh</p>
+<p>Netstat –tunlp </p>
+<p>Ps –aux | grep 进程名</p>
+<p>Iotop ， 如果没有，就先安装</p>
+<h2 id="11-rpm-和-yum软件安装"><a href="#11-rpm-和-yum软件安装" class="headerlink" title="11  rpm 和 yum软件安装"></a>11  rpm 和 yum软件安装</h2><h3 id="11-1-rpm包的管理"><a href="#11-1-rpm包的管理" class="headerlink" title="11.1 rpm包的管理"></a>11.1 rpm包的管理</h3><p>​       一种用于互联网下载包的打包及安装工具，它包含在某些Linux分发版中。它生成具有.RPM扩展名的文件。RPM是RedHat Package Manager（RedHat软件包管理工具）的缩写，类似windows的setup.exe，这一文件格式名称虽然打上了RedHat的标志，但理念是通用的。</p>
+<p>Linux的分发版本都有采用（suse,redhat, centos 等等），可以算是公认的行业标准了。</p>
+<p>简单查询语句 rpm -qa | grep xxx</p>
+<p><img src="image/1541076237589.png" alt="1541076237589"></p>
+<p><img src="image/1541076439734.png" alt="1541076439734"></p>
+<h3 id="11-2-rpm-常用的指令"><a href="#11-2-rpm-常用的指令" class="headerlink" title="11.2 rpm 常用的指令"></a>11.2 rpm 常用的指令</h3><p>rpm -qa  列出所有的rpm软件</p>
+<p>rpm -qa | grep xxx 列出某个rmp软件</p>
+<p>rpm -qi  file  查软件包的具体信息</p>
+<p><img src="image/1541077942744.png" alt="1541077942744"></p>
+<p> rpm -ql firefox  查看firefox软件的安装在哪里去了</p>
+<p><img src="image/1541078008215.png" alt="1541078008215"></p>
+<p>rpm -qf 文件的全路径   查该文件路径是属于那个软件的</p>
+<p><img src="image/1541078179359.png" alt="1541078179359"></p>
+<h3 id="13-3-卸载rpm包"><a href="#13-3-卸载rpm包" class="headerlink" title="13.3 卸载rpm包"></a>13.3 卸载rpm包</h3><p>基本语法</p>
+<p>rpm -e RPM包的名称</p>
+<p>应用案例</p>
+<p>删除firefox  软件包</p>
+<p>rpm -e firefox </p>
+<p><img src="image/1541078378766.png" alt="1541078378766"></p>
+<p>细节讨论</p>
+<p>1) 如果其它软件包依赖于您要卸载的软件包，卸载时则会产生错误信息。</p>
+<p>如：  $ rpm -e  foo </p>
+<p><strong>removing these packages would break dependencies:foo is needed by bar-1.0-1</strong></p>
+<p> 2) 如果我们就是要删除 foo这个rpm 包，可以增加参数 –nodeps ,就可以强制删除，但是一般不推荐这样做，因为依赖于该软件包的程序可能无法运行</p>
+<p>如：$ rpm -e <strong>–nodeps</strong> foo     [小心使用]</p>
+<h3 id="11-4-安装rpm包"><a href="#11-4-安装rpm包" class="headerlink" title="11.4 安装rpm包"></a>11.4 安装rpm包</h3><p> 基本语法</p>
+<p>rpm  -ivh  RPM包全路径名称 </p>
+<p> 参数说明</p>
+<p>   i=install 安装</p>
+<p>   v=verbose 提示</p>
+<p>   h=hash  进度条</p>
+<p>应用实例</p>
+<p>安装firefox浏览器</p>
+<p>提示：很多的rpm包，就在我们的centos安装的镜像文件中</p>
+<p>先找到firefox的安装包：挂载上我们安装的iso文件，在/media/文件中就可以找到。</p>
+<p><img src="image/1541078707708.png" alt="1541078707708"></p>
+<p>就会出现VMware tools</p>
+<p><img src="image/1541078856122.png" alt="1541078856122"></p>
+<p>再安装。</p>
+<p><img src="image/1541080183071.png" alt="1541080183071"></p>
+<h3 id="11-5-yum的使用"><a href="#11-5-yum的使用" class="headerlink" title="11.5 yum的使用"></a>11.5 yum的使用</h3><p>​       yum，是Yellow dog Updater, Modified 的简称，是杜克大学为了提高RPM 软件包安装性而开发的一种软件包管理器。起初是由yellow dog 这一发行版的开发者Terra Soft 研发，用python 写成，那时还叫做yup(yellow dog updater)，后经杜克大学的Linux@Duke 开发团队进行改进，遂有此名。yum 的宗旨是自动化地升级，安装/移除rpm 包，收集rpm 包的相关信息，检查依赖性并自动提示用户解决。yum 的关键之处是要有可靠的repository，顾名思义，这是软件的仓库，它可以是http 或ftp 站点，也可以是本地软件池，但必须包含rpm 的header，header 包括了rpm 包的各种信息，包括描述，功能，提供的文件，依赖性等。正是收集了这些header 并加以分析，才能自动化地完成余下的任务。 　　</p>
+<p>​        yum 的理念是使用一个中心仓库(repository)管理一部分甚至一个distribution 的应用程序相互关系，根据计算出来的软件依赖关系进行相关的升级、安装、删除等等操作，减少了Linux 用户一直头痛的dependencies 的问题。这一点上，yum 和apt 相同。apt 原为debian 的deb 类型软件管理所使用，但是现在也能用到RedHat 门下的rpm 了。 　　</p>
+<p>​        yum 主要功能是更方便的添加/删除/更新RPM 包，自动解决包的倚赖性问题，便于管理大量系统的更新问题。 </p>
+<p>​      yum 可以同时配置多个资源库(Repository)，简洁的配置文件（/etc/yum.conf），自动解决增加或删除rpm 包时遇到的依赖性问题，保持与RPM 数据库的一致性。 </p>
+<p>​      yum是shell前端软件包管理器。基于rpm管理。能够从指定服务器自动下载rpm包并且安装。可以自动处理依赖性关系。并且一次安装所有的依赖包软件。使用yum的前提是可以联网。</p>
+<p>查询yum 服务器是否有需要安装的软件</p>
+<p>   yum list | grep xx 软件列表</p>
+<p><img src="image/1542541899863.png" alt="1542541899863"></p>
+<p>安装指定的yum包</p>
+<p>​      yum install xxx 下载安装</p>
+<p><img src="image/1542541981965.png" alt="1542541981965"></p>
+<p>选项说明</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-y</td>
+<td>对所有提问都回答“yes”</td>
+</tr>
+</tbody>
+</table>
+<p>参数说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>install</td>
+<td>安装rpm软件包</td>
+</tr>
+<tr>
+<td>update</td>
+<td>更新rpm软件包</td>
+</tr>
+<tr>
+<td>check-update</td>
+<td>检查是否有可用的更新rpm软件包</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>删除指定的rpm软件包</td>
+</tr>
+<tr>
+<td>list</td>
+<td>显示软件包信息</td>
+</tr>
+<tr>
+<td>clean</td>
+<td>清理yum过期的缓存</td>
+</tr>
+<tr>
+<td>deplist</td>
+<td>显示yum软件包的所有依赖关系</td>
+</tr>
+</tbody>
+</table>
+<h4 id="11-5-1-修改网络YUM源"><a href="#11-5-1-修改网络YUM源" class="headerlink" title="11.5.1 修改网络YUM源"></a>11.5.1 修改网络YUM源</h4><p>默认的系统YUM源，需要连接国外apache网站，网速比较慢，可以修改关联的网络YUM源为国内镜像的网站，比如网易163。</p>
+<p>1．前期文件准备</p>
+<p>（1）前提条件linux系统必须可以联网</p>
+<p>（2）在Linux环境中访问该网络地址：<a href="http://mirrors.163.com/.help/centos.html" target="_blank" rel="noopener">http://mirrors.163.com/.help/centos.html</a>，在使用说明中点击CentOS6-&gt;再点击保存</p>
+<p>​           <img src="image/1542542640295.png" alt="1542542640295">                                       </p>
+<p>图1-164 下载CentOS6</p>
+<p>（3）查看文件保存的位置</p>
+<p><img src="image/1542542667581.png" alt="1542542667581"></p>
+<p>在打开的终端中输入如下命令，就可以找到文件的保存位置。</p>
+<p>[atguigu@hadoop101 下载]$ pwd</p>
+<p>/home/atguigu/下载</p>
+<p>2．替换本地yum文件</p>
+<p>​    （1）把下载的文件移动到/etc/yum.repos.d/目录</p>
+<p>[root@hadoop101 下载]# mv CentOS6-Base-163.repo /etc/yum.repos.d/  </p>
+<p>​    （2）进入到/etc/yum.repos.d/目录</p>
+<p>[root@hadoop101 yum.repos.d]# pwd</p>
+<p>/etc/yum.repos.d</p>
+<p>​    （3）用CentOS6-Base-163.repo替换CentOS-Base.repo</p>
+<p>[root@hadoop101 yum.repos.d]# mv CentOS6-Base-163.repo  CentOS-Base.repo</p>
+<p>3．安装命令</p>
+<p>（1）[root@hadoop101 yum.repos.d]#yum clean all</p>
+<p>（2）[root@hadoop101 yum.repos.d]#yum makecache</p>
+<p>yum makecache就是把服务器的包信息下载到本地电脑缓存起来</p>
+<p>4．测试</p>
+<p>[root@hadoop101 yum.repos.d]#yum list | grep firefox</p>
+<p>[root@hadoop101 ~]#yum -y install firefox.x86_64</p>
+<h2 id="12-javaEE环境安装"><a href="#12-javaEE环境安装" class="headerlink" title="12 javaEE环境安装"></a>12 javaEE环境安装</h2><p>如果需要在Linux下进行JavaEE的开发，我们需要安装如下软件：</p>
+<h3 id="12-1-安装JDK"><a href="#12-1-安装JDK" class="headerlink" title="12.1 安装JDK"></a>12.1 安装JDK</h3><p>安装步骤<br>1) 先将软件通过xftp5 上传到/opt 下<br>2) 解压缩到/opt<br>3) 配置环境变量的配置文件vim /etc/profile<br>4) JAVA_HOME=/opt/jdk1.8.0_191<br>5) PATH=/opt/jdk1.8.0_191/bin:$PATH<br>6) export JAVA_HOME PATH</p>
+<p>7）需要注销当前用户才能正常使用。</p>
+<p>测试是否安装成功<br>编写一个简单的Hello.java 输出”hello,world!”</p>
+<h3 id="12-2-tomcat的安装"><a href="#12-2-tomcat的安装" class="headerlink" title="12.2 tomcat的安装"></a>12.2 tomcat的安装</h3><p>步骤:<br>1) 解压缩到/opt<br>2) 启动tomcat ./startup.sh<br>3) 开放端口vim /etc/sysconfig/iptables</p>
+<p><img src="image/1543233017134.png" alt="1543233017134"></p>
+<p>4) 重启防火墙 service  iptables restart</p>
+<p><img src="image/1543233135934.png" alt="1543233135934"></p>
+<p>测试是否安装成功：<br>在windows、Linux 下访问<a href="http://192.168.30.130:8080" target="_blank" rel="noopener">http://192.168.30.130:8080</a></p>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://yoursite.com" class="b-link-green">October Autumn</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/04/11/linux-2019-04-11-linux-primer/" class="b-link-green">linux入门</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/12/java-2019-04-12-jdk8-new-feature/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="jdk8 新特性">
+                        
+                        <span class="card-title">jdk8 新特性</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">1.  接口的默认方法和静态方法
+​        jdk8新增的接口默认方法，接口可以有默认的实现方法。而不需要接口的实现类去实现该方法。我们只需要在方法前加上default关键字就可以了。
+
+1. 接口默认方法1. 语法  public</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/java/" class="post-category" target="_blank">
+                                    java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/11/spring-2019-04-11-spring-boot-primer/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="spring-boot入门">
+                        
+                        <span class="card-title">spring-boot入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">一、入门搭建项目1、搭建项目
+使用maven创建maven项目
+
+
+在pom.xml文件中加入spring-boot的parent
+
+&lt;parent>
+    &lt;groupId>org.springframework.boot&</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/spring/" class="post-category" target="_blank">
+                                    spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/spring-boot/" target="_blank">
+                        <span class="chip bg-color">spring-boot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    </div>
+    <div class="col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://blinkfox.github.io/" target="_blank">Blinkfox</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">37.4k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/mafeilong147135" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:mfl147135@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=957928695" class="tooltipped" data-tooltip="QQ联系我: 957928695" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
